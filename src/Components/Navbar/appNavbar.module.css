@@ -1,0 +1,47 @@
+.navbarHeading{
+    display: flex;
+    justify-content: space-around;
+    color: white;
+    background-color: rgb(228, 33, 33);
+    font-weight: 600;
+    padding: 0.5rem;
+    border: 0.5px solid white;
+    width: 100%;
+}
+.hr{
+    border: 0.5px solid white;
+}
+.searchBar{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgb(228, 33, 33);
+    padding: 0.5rem;
+    color: white;
+}
+.logo{
+    height: 3rem;
+}
+.searchBar input{
+    height: 1.5rem;
+    width: 23rem;
+    padding: 0.4rem;
+    border: none;
+    border-radius: 2rem;
+}
+
+.filters{
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(3, 3, 190);
+    color: white;
+    font-weight: 600;
+    padding: 0.5rem;
+}
+.navHead{
+    position: relative;
+    cursor: pointer;
+}
+.mobileModal{
+    position: absolute;
+}
