@@ -3,6 +3,7 @@
     flex-direction: column;
 }
 .contactImage{
+    margin-top: 0.3rem;
     height: 22rem;
     width: 100%;
     border-radius: 0.5rem;

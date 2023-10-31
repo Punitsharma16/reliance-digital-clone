@@ -9,21 +9,7 @@ export const Products = ()=>{
   const val = itemVal;
   // console.log(val);
   const [filterData,setFilterdata] = useState([]);
-    const fetchProducts = async()=>{
-        try {
-            const products = await axios.get(
-                "https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?limit=700",
-                {
-                    headers: {projectID: 'f2wxvt7cmknp'}
-                }
-            )
-            console.log(products.data);
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-
+    
     const fetchData = async (val) => {
   try {
     const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?filter={"subCategory":"${val}"}&limit=100`, {
@@ -44,7 +30,6 @@ export const Products = ()=>{
 };
 
     useEffect(()=>{
-        fetchProducts();
         fetchData(val);
     },[val])
 

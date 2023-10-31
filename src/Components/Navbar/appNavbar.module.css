@@ -38,10 +38,10 @@
     font-weight: 600;
     padding: 0.5rem;
 }
-.navHead{
-    position: relative;
+.navFilter{
     cursor: pointer;
 }
-.mobileModal{
-    position: absolute;
+.navFilter:hover{
+    color: aqua;
 }
+
