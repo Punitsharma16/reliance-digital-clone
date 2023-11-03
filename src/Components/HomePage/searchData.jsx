@@ -2,10 +2,12 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import style from '../ProductsData/products.module.css'
 import heart from '../svgs/heart.svg'
+import { useNavigate } from "react-router-dom";
 // import { SendValToSearchData } from "../../App";
 
-export const SearchData = ({searchVal})=>{
+export const SearchData = ({searchVal,setProductID})=>{
     const [data,setData] = useState([]);
+    const navigate = useNavigate();
     // const {search} = useContext(SendValToSearchData);
     // const search = 'mobile'
     console.log(searchVal);
@@ -36,13 +38,18 @@ export const SearchData = ({searchVal})=>{
     useEffect(()=>{
         fetchProducts();
     },[])
+
+    const handleId = (e)=>{
+      setProductID(e.currentTarget.id)
+      navigate('/productDetails');
+    }
     return(
         <main>
           <section className={style.products}>
             {
               filterItems.map((data,i)=>{
                 return(
-                  <main className={style.ProductsContainer} key={i}>
+                  <main onClick={handleId} className={style.ProductsContainer} id={data._id} key={i}>
                     <img className={style.productImage} src={data.displayImage} alt="" />
                     <section className={style.productInfo}>
                     <p className={style.productName}>{data.name}</p><br />

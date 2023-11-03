@@ -1,0 +1,41 @@
+.itemImage{
+    height: 22rem;
+    margin-top: 2rem;
+}
+.postDetailContainer{
+    display: flex;
+    margin-right: 1rem;
+}
+.imageContainer{
+    width: 45rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.offers{
+    height: 15rem;
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+    gap: 1rem;
+}
+.input{
+    margin: 0.5rem;
+    width: 12rem;
+    padding: 0.5rem;
+    border: 1px solid blue;
+    border-radius: 0.3rem;
+}
+.button{
+    width: 9rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    font-size: 17px;
+    font-weight: 600;
+    color: #fff;
+    border: none;
+    background-color: orangered;
+    border-radius: 0.2rem;
+}

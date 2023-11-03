@@ -3,10 +3,12 @@ import { useContext, useEffect, useState } from "react";
 import { SendValToFilter } from "../../App";
 import style from '../ProductsData/products.module.css'
 import heart from '../svgs/heart.svg'
+import { useNavigate } from "react-router-dom";
 
 export const FilteredData = ()=>{
     const [yourData,setYourData] = useState([]);
-    const {navVal} = useContext(SendValToFilter);
+    const {navVal,setProductID} = useContext(SendValToFilter);
+    const navigate = useNavigate();
     const val = navVal;
     console.log(val);
     const fetchData = async (val) => {
@@ -30,13 +32,18 @@ export const FilteredData = ()=>{
           useEffect(()=>{
               fetchData(val);
           },[val])
+
+          const handleId = (e)=>{
+            setProductID(e.currentTarget.id)
+            navigate('/productDetails');
+          }
     return(
       <main>
       <section className={style.products}>
         {
           yourData.map((data,i)=>{
             return(
-              <main className={style.ProductsContainer} key={i}>
+              <main onClick={handleId} className={style.ProductsContainer} id={data._id} key={i}>
                 <img className={style.productImage} src={data.displayImage} alt="" />
                 <section className={style.productInfo}>
                 <p className={style.productName}>{data.name}</p><br />

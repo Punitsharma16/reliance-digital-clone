@@ -1,0 +1,40 @@
+.whishlistImage{
+    height: 10rem;
+    margin: 1rem 0rem;
+}
+.itemContainer{
+    outline: 1px solid #ddd;
+    margin: 1rem;
+    width: 11rem;
+    padding: 0.5rem;
+    transition: box-shadow 0.1s;
+}
+.name{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    font-weight: 600;
+    color: darkblue;
+}
+.price{
+    padding: 0.4rem;
+    background-color: antiquewhite;
+    margin-top: 0.7rem;
+    font-size: 15px;
+    color: #3d3d3d;
+    font-weight: 400;
+}
+.itemContainer div{
+    align-self: center;
+    text-align: center;
+    border-top: 1px solid #ddd;
+    height: 1rem;
+    padding-top: 0.5rem;
+    margin: 1rem 0rem 0.5rem 0rem;
+    cursor: pointer;
+    color: darkblue;
+}
+.itemContainer:hover{
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
