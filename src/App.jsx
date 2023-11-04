@@ -21,7 +21,7 @@ export const SendValToSearchData = createContext();
 function App() {
   const [itemVal,setItemVal] = useState('');
   const [navVal,setNavVal] = useState('');
-  const [search,setSearchVal] = useState('val');
+  const [search,setSearchVal] = useState('');
   const [productID,setProductID] = useState('');
   console.log(navVal);
   console.log(itemVal);
@@ -40,7 +40,7 @@ function App() {
         }>
         <Route path='/home' element={
       <ItemValContext.Provider value={{setItemVal}}>
-          <HomePage/>
+          <HomePage search={search} setProductID={setProductID}/>
       </ItemValContext.Provider>
         }/>
         <Route path='/filterData' element={
@@ -54,7 +54,7 @@ function App() {
       </SendValToProduct.Provider>
         }/>
         <Route path='/contact' element={<Contact/>}/>
-        <Route path='/searchItems' element={<SearchData searchVal={search} setProductID={setProductID} />}/>
+        {/* <Route path='/searchItems' element={<SearchData searchVal={search} setProductID={setProductID} />}/> */}
         <Route path='/productDetails' element={<ProductDetails productID={productID}/>}/>
         <Route path='/wishlist' element={<WishList productID={productID}/>}/>
         </Route>

@@ -9,9 +9,7 @@ export const WishList = ({productID})=>{
     const [wishlistData,setWishlistData] = useState([]);
     const [id, setId] = useState();
     console.log(id);
-    const body = {
-        "productId": `${productID}`
-      }
+    
     
     // const addzItemTowishlist = async(productID)=>{
     //     try {

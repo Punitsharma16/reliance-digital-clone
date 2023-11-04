@@ -36,7 +36,7 @@ export const AppNavbar = ()=>{
 
     const handleSearchInput = (e)=>{
       setSearchVal(e.target.value);
-      navigate('/searchItems')
+      // navigate('/searchItems')
     }
     return(
         <main>

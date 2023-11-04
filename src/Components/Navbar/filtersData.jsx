@@ -8,14 +8,19 @@ import { useNavigate } from "react-router-dom";
 export const FilteredData = ()=>{
     const [yourData,setYourData] = useState([]);
     const {navVal,setProductID} = useContext(SendValToFilter);
+    const token = sessionStorage.getItem('authToken');
+    const [id,setId] = useState();
     const navigate = useNavigate();
+    const body = {
+      "productId": `${id}`
+    }
     const val = navVal;
     console.log(val);
     const fetchData = async (val) => {
         try {
           const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?filter={"subCategory":"${val}"}&limit=100`, {
             headers: {
-              projectID: 'f2wxvt7cmknp',
+              'projectID': 'f2wxvt7cmknp',
             },
           });
       
@@ -33,6 +38,31 @@ export const FilteredData = ()=>{
               fetchData(val);
           },[val])
 
+
+          const addItemTowishlist = async()=>{
+            try {
+                
+                const responce = await axios.patch(
+                    'https://academics.newtonschool.co/api/v1/ecommerce/wishlist',
+                     body ,
+                    {
+                        headers: {
+                        "Authorization" : `Bearer ${token}`,
+                         "projectID" : 'f2wxvt7cmknp'
+                    }
+                }
+                )
+                console.log(responce.data.message);
+                alert(responce.data.message);
+            } catch (error) {
+                console.log(error);
+                alert('Already added in wishlist');
+            }
+        }
+        useEffect(()=>{
+          addItemTowishlist()
+        },[id]);
+
           const handleId = (e)=>{
             setProductID(e.currentTarget.id)
             navigate('/productDetails');
@@ -43,16 +73,16 @@ export const FilteredData = ()=>{
         {
           yourData.map((data,i)=>{
             return(
-              <main onClick={handleId} className={style.ProductsContainer} id={data._id} key={i}>
+              <main className={style.ProductsContainer}  key={i}>
+                <section onClick={handleId} id={data._id} className={style.productInfo}>
                 <img className={style.productImage} src={data.displayImage} alt="" />
-                <section className={style.productInfo}>
                 <p className={style.productName}>{data.name}</p><br />
                 <p style={{color:'blue',fontWeight:'600'}}>&#x20B9; {data.price}</p><br />
                 <span className={style.offer}>OFFERS AVAILABLE</span>
-                <div className={style.wishList}>
+                </section>
+                <div id={data._id} onClick={(e)=>setId(e.currentTarget.id)} className={style.wishList}>
                   <span><img src={heart} alt="" />Add to Wishlist</span>
                 </div>
-                </section>
               </main>
             )
           })
