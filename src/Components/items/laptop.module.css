@@ -1,0 +1,41 @@
+.mainContainer{
+    width: 15rem;
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
+.img{
+    height: 12rem;
+    margin: 1rem;
+}
+.name{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: rgb(89, 20, 168);
+    font-weight: 500;
+}
+.button{
+    height: 6rem;
+    width: 2rem;
+}
+.divForName{
+    max-width: 10rem;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+.mainContainer span{
+    font-size: 14px;
+    font-weight: 400;
+    color: #6e6464;
+}
+.offerTag{
+    font-size: 12px;
+    border: 1px solid green;
+    color: green;
+    border-radius: 1rem;
+    padding: 0.1rem;
+    margin-top: 0.4rem;
+    width: 7rem;
+    text-align: center;
+    font-weight: 500;
+}

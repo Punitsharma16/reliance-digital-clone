@@ -4,6 +4,7 @@ import { SendValToFilter } from "../../App";
 import style from '../ProductsData/products.module.css'
 import heart from '../svgs/heart.svg'
 import { useNavigate } from "react-router-dom";
+import { AddItemWishList } from "../WishList/addItemToWishlist";
 
 export const FilteredData = ()=>{
     const [yourData,setYourData] = useState([]);
@@ -39,29 +40,30 @@ export const FilteredData = ()=>{
           },[val])
 
 
-          const addItemTowishlist = async()=>{
-            try {
-                
-                const responce = await axios.patch(
-                    'https://academics.newtonschool.co/api/v1/ecommerce/wishlist',
-                     body ,
-                    {
-                        headers: {
-                        "Authorization" : `Bearer ${token}`,
-                         "projectID" : 'f2wxvt7cmknp'
-                    }
-                }
-                )
-                console.log(responce.data.message);
-                alert(responce.data.message);
-            } catch (error) {
-                console.log(error);
-                alert('Already added in wishlist');
-            }
-        }
-        useEffect(()=>{
-          addItemTowishlist()
-        },[id]);
+        //   const addItemTowishlist = async(id)=>{
+        //     try {
+        //         const responce = await axios.patch(
+        //             'https://academics.newtonschool.co/api/v1/ecommerce/wishlist',
+        //             {
+        //               "productId": `${id}`
+        //             } ,
+        //             {
+        //                 headers: {
+        //                 "Authorization" : `Bearer ${token}`,
+        //                  "projectID" : 'f2wxvt7cmknp'
+        //             }
+        //         }
+        //         )
+        //         console.log(responce.data.message);
+        //         alert(responce.data.message);
+        //     } catch (error) {
+        //         console.log(error);
+        //         alert('Already added in wishlist');
+        //     }
+        // }
+        // useEffect(()=>{
+        //   addItemTowishlist()
+        // },[id]);
 
           const handleId = (e)=>{
             setProductID(e.currentTarget.id)
@@ -80,9 +82,10 @@ export const FilteredData = ()=>{
                 <p style={{color:'blue',fontWeight:'600'}}>&#x20B9; {data.price}</p><br />
                 <span className={style.offer}>OFFERS AVAILABLE</span>
                 </section>
-                <div id={data._id} onClick={(e)=>setId(e.currentTarget.id)} className={style.wishList}>
+                {/* <div id={data._id} onClick={(e)=>addItemTowishlist(e.currentTarget.id)} className={style.wishList}>
                   <span><img src={heart} alt="" />Add to Wishlist</span>
-                </div>
+                </div> */}
+                <AddItemWishList id={data._id}/>
               </main>
             )
           })

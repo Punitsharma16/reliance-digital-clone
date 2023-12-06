@@ -1,0 +1,154 @@
+.modal{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    background-color: rgba(0,0,0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.checkoutBox{
+    width: 90%;
+    background-color: rgb(232, 232, 240);
+    outline: 1px solid #ac9797;
+    padding: 1rem;
+    border-radius: 0.3rem;
+    margin: 1rem 2rem;
+}
+.addressBox{
+    outline: 1px solid rgb(208, 208, 226);
+    margin: 1rem;
+    width: 47rem;
+    background-color: #fff;
+    /* padding: 0rem 1rem 1rem 1rem; */
+}
+.addressHeading{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: rgb(72, 170, 209);
+    color: #fff;
+    font-weight: 600;
+    font-size: 17px;
+}
+.form{
+    margin: 1rem;
+}
+.form input{
+    padding: 0.6rem;
+    margin: 0.5rem;
+    width: 40rem;
+    outline: 1px solid rgb(208, 208, 226);
+    border: none;
+    border-radius: 0.3rem;
+}
+.submitButton{
+    width: 10rem;
+    padding: 0.8rem;
+    background-color: red;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}
+.addressContainer{
+    outline: 1px solid #ddd;
+    border-radius: 0.3rem;
+    margin: 1rem 0rem;
+    background-color: whitesmoke;
+    padding: 1rem;
+    color: #3d3d3d;
+}
+.addressContainer span{
+    font-size: 14px;
+    font-weight: 400;
+}
+.addressButton{
+    display: flex;
+    justify-content: space-between;
+    width: 18rem;
+    margin-top: 2rem;
+}
+.addressButton button{
+    padding: 0.4rem;
+    width: 7rem;
+    background-color: orangered;
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 0.3rem;
+    cursor: pointer;
+}
+.cardItemImage{
+    height: 10rem;
+}
+.itemContainer{
+    margin: 1rem 1rem 1rem 2rem;
+    outline: 1px solid #bdbbbb;
+    background-color: #fff;
+    padding: 1rem;
+    width: 47rem;
+    border-radius: 0.3rem;
+}
+.cardItem{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    height: 10rem;
+
+}
+.cardItemBox{
+    width: 18rem;
+    color: rgb(11, 11, 112);
+}
+.paymentButton{
+    width: 10rem;
+    padding: 0.5rem;
+    margin: 1rem;
+    border: none;
+    background-color: red;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 0.3rem;
+}
+.orderTotal{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.7rem;
+    margin-top: 1rem;
+    background-color: #bdbbbb;
+    font-weight: 600;
+}
+.paymentBox{
+    outline: 1px solid #ddd;
+    margin: 2rem;
+    padding: 1rem;
+    background-color: rgb(239, 245, 248);
+    color: #3d3d3d;
+    width: 22rem;
+    border-radius: 0.5rem;
+}
+.paymentBox input{
+    width: 19rem;
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    margin: 0.5rem;
+    border: none;
+    outline: 1px solid #ddd;
+}
+.paymentComplete{
+    margin: 1rem;
+    padding: 0.7rem;
+    width: 15rem;
+    font-size: 16px;
+    background-color: rgb(235, 47, 47);
+    border: none;
+    border-radius: 0.3rem;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+}

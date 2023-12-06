@@ -4,6 +4,7 @@ import style from '../ProductsData/products.module.css'
 import heart from '../svgs/heart.svg'
 import { useNavigate } from "react-router-dom";
 import { ItemValContext } from "../../App";
+import { AddItemWishList } from "../WishList/addItemToWishlist";
 // import { SendValToSearchData } from "../../App";
 
 export const SearchData = ({searchVal,setProductID})=>{
@@ -52,29 +53,32 @@ export const SearchData = ({searchVal,setProductID})=>{
 
 
 
-    const addItemTowishlist = async()=>{
-      try {
+  //   const addItemTowishlist = async(id)=>{
+  //     try {
           
-          const responce = await axios.patch(
-              'https://academics.newtonschool.co/api/v1/ecommerce/wishlist',
-               body ,
-              {
-                  headers: {
-                  "Authorization" : `Bearer ${token}`,
-                   "projectID" : 'f2wxvt7cmknp'
-              }
-          }
-          )
-          console.log(responce.data.message);
-          alert(responce.data.message);
-      } catch (error) {
-          console.log(error);
-          alert('Already added in wishlist');
-      }
-  }
-  useEffect(()=>{
-    addItemTowishlist()
-  },[id]);
+  //         const responce = await axios.patch(
+  //             'https://academics.newtonschool.co/api/v1/ecommerce/wishlist',
+  //             {
+  //               "productId": `${id}`
+  //             } ,
+  //             {
+  //                 headers: {
+  //                 "Authorization" : `Bearer ${token}`,
+  //                  "projectID" : 'f2wxvt7cmknp'
+  //             }
+  //         }
+  //         )
+  //         console.log(responce.data.message);
+  //         alert(responce.data.message);
+  //     } catch (error) {
+  //         console.log(error);
+  //         alert('Already added in wishlist');
+  //     }
+  // }
+  // useState(()=>{
+  //   addItemTowishlist();
+  // },[id]);
+
     return(
         <main>
           <section className={style.products}>
@@ -90,9 +94,10 @@ export const SearchData = ({searchVal,setProductID})=>{
                     <span className={style.offer}>OFFERS AVAILABLE</span>
                     </section>
 
-                    <div onClick={(e)=>setId(e.currentTarget.id)} id={data._id} className={style.wishList}>
+                    {/* <div onClick={(e)=>addItemTowishlist(e.currentTarget.id)} id={data._id} className={style.wishList}>
                       <span><img src={heart} alt="" />Add to Wishlist</span>
-                    </div>
+                    </div> */}
+                    <AddItemWishList id={data._id}/>
                   </main>
                 )
               })

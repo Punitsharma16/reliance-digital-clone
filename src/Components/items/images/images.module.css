@@ -1,0 +1,12 @@
+.mainContainer{
+    margin: 1rem;
+    background-color: #fff;
+}
+.mainContainer img{
+    margin: 1rem;
+    cursor: pointer;
+}
+.imagesDiv{
+    display: flex;
+    justify-content: space-around;
+}

@@ -1,0 +1,9 @@
+.box{
+    text-align: center;
+    padding: 1rem;
+    cursor: pointer;
+}
+.container{
+    width: 10rem;
+    border-radius: 0.3rem;
+}

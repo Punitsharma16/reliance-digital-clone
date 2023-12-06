@@ -12,33 +12,38 @@ import { ProductDetails } from './Components/ProductsData/ProductDetails';
 import { SignUp } from './Components/signup/signup';
 import { Login } from './Components/login/login';
 import { WishList } from './Components/WishList/wishlist';
+import { CartItems } from './Components/Cart/cartItem';
+import { Checkout } from './Components/Checkout/checkout';
+import { ProfileModal } from './Components/Profile/profileModal';
 
 export const ItemValContext = createContext();
 export const SendValToProduct = createContext();
 export const ValContextNavbar = createContext();
 export const SendValToFilter = createContext();
 export const SendValToSearchData = createContext();
+export const CartItemsData = createContext();
 function App() {
   const [itemVal,setItemVal] = useState('');
   const [navVal,setNavVal] = useState('');
-  const [search,setSearchVal] = useState('');
+  const [search,setSearchVal] = useState('thev');
   const [productID,setProductID] = useState('');
+  const [cartVal,setCartVal] = useState();
   console.log(navVal);
   console.log(itemVal);
   console.log(search);
   console.log(productID);
-
+  console.log(cartVal);
   return (
     <div className="App">
       <Routes>
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/' element={
-      <ValContextNavbar.Provider value={{setNavVal,setSearchVal}}>
+      <ValContextNavbar.Provider value={{setNavVal,setSearchVal,setProductID,setItemVal}}>
           <NavbarOutlet/>
       </ValContextNavbar.Provider>
         }>
-        <Route path='/home' element={
+        <Route path='/' element={
       <ItemValContext.Provider value={{setItemVal}}>
           <HomePage search={search} setProductID={setProductID}/>
       </ItemValContext.Provider>
@@ -57,7 +62,16 @@ function App() {
         {/* <Route path='/searchItems' element={<SearchData searchVal={search} setProductID={setProductID} />}/> */}
         <Route path='/productDetails' element={<ProductDetails productID={productID}/>}/>
         <Route path='/wishlist' element={<WishList productID={productID}/>}/>
+        <Route path='/cartItem' element={
+          <CartItemsData.Provider value={{setCartVal}}>
+              <CartItems/>
+          </CartItemsData.Provider>
+      }/>
+        <Route path='/checkout' element={
+              <Checkout cartVal={cartVal}/>
+        }/>
         </Route>
+        {/* <Route path='/profile' element={<ProfileModal/>}/> */}
       </Routes>
     </div>
   );

@@ -3,7 +3,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    background-color: antiquewhite;
+    background-color: aliceblue;
 }
 .ProductsContainer{
     display: flex;
@@ -13,7 +13,7 @@
     /* border: 1px solid black; */
     margin: 1rem;
     width: 15rem;
-    outline: 1px solid #d999;
+    outline: 1px solid #ddd;
     padding: 0.5rem;
     background-color: white;
     transition: box-shadow 0.2s;
@@ -28,6 +28,10 @@
   width: 14rem; /* Show only half of the name */
   margin: 0 auto;
   color: blue;
+}
+.productInfo{
+    border-bottom: 1px solid #3d3d3d;
+    padding-bottom: 1rem;
 }
 .productImage{
     height: 14rem;
