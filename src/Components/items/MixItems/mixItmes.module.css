@@ -1,0 +1,25 @@
+.mainContainer{
+    padding: 1rem;
+    margin: 1rem 0rem;
+    background-color: white
+}
+.mainContainer p{
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+.imageBox{
+    display: flex;
+    justify-content: space-evenly;
+    padding-bottom: 3rem;
+}
+.imageBox img{
+    cursor: pointer;
+}
+
+@media screen and (max-width:480px) {
+    .imageBox img{
+        height: 7rem;
+    }
+}

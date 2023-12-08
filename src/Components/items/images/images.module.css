@@ -1,5 +1,5 @@
 .mainContainer{
-    margin: 1rem;
+    margin: 1rem 0rem;
     background-color: #fff;
 }
 .mainContainer img{
@@ -9,4 +9,10 @@
 .imagesDiv{
     display: flex;
     justify-content: space-around;
+}
+
+@media screen and (max-width:480px) {
+    .mainContainer img{
+        height: 7rem;
+    }
 }

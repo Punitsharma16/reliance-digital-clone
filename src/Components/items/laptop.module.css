@@ -28,6 +28,9 @@
     font-weight: 400;
     color: #6e6464;
 }
+.mainContainer section{
+    cursor: pointer;
+}
 .offerTag{
     font-size: 12px;
     border: 1px solid green;
@@ -38,4 +41,26 @@
     width: 7rem;
     text-align: center;
     font-weight: 500;
+}
+
+
+@media screen and (max-width:480px) {
+    .mainContainer{
+        width: 9rem;
+        margin: 0.5rem;
+        padding: 0.5rem;
+    }
+    .img{
+        height: 5rem;
+        margin: 0.7rem;
+    }
+    .container{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+    .button{
+        height: 3rem;
+        width: 1rem;
+    }
 }

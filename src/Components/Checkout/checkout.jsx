@@ -1,12 +1,15 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import style from './checkout.module.css'
 import rating from '../svgs/rating.svg'
-export const Checkout = ({cartVal})=>{
+import { Payment } from '../Orders/PayementModal/paymentModel';
+export const Checkout = ()=>{
     const [addressModal,setAddressModal] = useState(false);
     const [showAddress,setShowAddress] = useState(false);
     const [showOrder,setShowOrder] = useState(false);
     const [showPayment,setShowPayment] = useState(false);
-    console.log(cartVal);
+    const [cartData,setCartData] = useState({});
+    const [paymentModel,setPaymentModel] = useState(false);
+    // console.log(cartVal);
     const [address,setAddress] = useState({
         pincode:'',
         firstname:'',
@@ -27,6 +30,16 @@ export const Checkout = ({cartVal})=>{
         setAddressModal(false);
         setShowAddress(true);
     }
+
+    useEffect(()=>{
+        const data = sessionStorage.getItem('cartItems');
+    const parseData = JSON.parse(data);
+    setCartData(parseData);
+    },[]);
+    
+    console.log(cartData);
+
+
     return(
         <main>
             <aside>
@@ -63,12 +76,13 @@ export const Checkout = ({cartVal})=>{
                     { showOrder &&
                         <section >
                     {
-                        cartVal.items?.map((product)=>{
+                        cartData.items?.map((product)=>{
                             return (
                                 <main className={style.itemContainer}  key={product._id}>
                                     <section className={style.cardItem}>
+                                          <aside className={style.imgAndNameBox}>
                                         <img className={style.cardItemImage} src={product.product.displayImage} alt="" />
-                                        <div className={style.cardItemBox}>
+                                        <div className={style.cardItemBox1}>
                                             <p style={{fontWeight:'600',marginBottom:'0.5rem'}}>{product.product.name}</p>
                                             <p>
                                                 <img src={rating} alt="rating" />
@@ -77,7 +91,8 @@ export const Checkout = ({cartVal})=>{
                                                 <span style={{fontSize:'15px',fontWeight:'400',marginLeft:'0.5rem'}}>( {product.product.ratings} rating )</span>
                                             </p>
                                         </div>
-                                        <div className={style.cardItemBox} style={{textAlign:'right'}}>
+                                            </aside>
+                                        <div className={style.cardItemBox2} style={{textAlign:'right'}}>
                                             <p style={{fontWeight:'600',fontSize:'17px',color:'#3d3d3d'}}>Price :&#x20B9; {product.product.price}</p>
                                             <p style={{fontWeight:'400',fontSize:'14px',color:'#3d3d3d'}}>Inclusive of all taxes</p>
                                             <p style={{fontSize:'14px',color:'aquamarin'}}>Free shipping</p>
@@ -93,7 +108,7 @@ export const Checkout = ({cartVal})=>{
 
                 <div className={style.orderTotal}>
                     <p>Order Total</p>
-                    <p style={{color:'darkblue'}}> &#x20B9; {cartVal.totalPrice}</p>
+                    <p style={{color:'darkblue'}}> &#x20B9; {cartData.totalPrice}</p>
                 </div>
                 <div style={{margin:'1rem'}}>
                     <p style={{fontSize:'13px'}}>*In order to authenticate and redeem Store Credit or ROne Loyalty Points an OTP validation shall be required. Post successful OTP verification, further payment if any shall be facilitated.</p>
@@ -118,7 +133,7 @@ export const Checkout = ({cartVal})=>{
                     </div>
                     
                     <hr />
-                     <aside className={style.paymentBox}>
+                     <form  className={style.paymentBox}>
                           <section>
                                <input type="number" name="debitCardNo" id="debitCardNo" placeholder='Enter Card Number' required/><br />
                                <input type="text" name="nameOnCard" id="nameOnCard" placeholder='Enter Name on Card'required/> <br />
@@ -132,8 +147,8 @@ export const Checkout = ({cartVal})=>{
                                  Your order will not be completed without this action</p>
                             <input style={{width:'1rem'}} type="checkbox" name="check" id="check" required />
                             <label style={{fontSize:'14px'}} htmlFor="check">I agree to the Term & Conditions</label><br />
-                            <button className={style.paymentComplete}>PAY RS. {cartVal.totalPrice}</button>
-                     </aside>
+                            <button onClick={()=>setPaymentModel(true)} className={style.paymentComplete}>PAY RS. {cartData.totalPrice}</button>
+                     </form>
                      </main>
                      }
             </section>
@@ -167,6 +182,7 @@ export const Checkout = ({cartVal})=>{
             </aside>
          </main>
          }
+         {paymentModel && <Payment/>}
         </main>
     )
 }

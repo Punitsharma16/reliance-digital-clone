@@ -1,9 +1,7 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import style from '../ProductsData/products.module.css'
-import heart from '../svgs/heart.svg'
 import { useNavigate } from "react-router-dom";
-import { ItemValContext } from "../../App";
 import { AddItemWishList } from "../WishList/addItemToWishlist";
 // import { SendValToSearchData } from "../../App";
 
@@ -89,9 +87,11 @@ export const SearchData = ({searchVal,setProductID})=>{
                     <section onClick={handleId} id={data._id} className={style.productInfo}>
 
                     <img className={style.productImage} src={data.displayImage} alt="" />
+                    <div>
                     <p className={style.productName}>{data.name}</p><br />
                     <p style={{color:'blue',fontWeight:'600'}}>&#x20B9; {data.price}</p><br />
                     <span className={style.offer}>OFFERS AVAILABLE</span>
+                    </div>
                     </section>
 
                     {/* <div onClick={(e)=>addItemTowishlist(e.currentTarget.id)} id={data._id} className={style.wishList}>

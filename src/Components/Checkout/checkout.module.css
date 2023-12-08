@@ -99,7 +99,11 @@
     height: 10rem;
 
 }
-.cardItemBox{
+.cardItemBox1{
+    width: 18rem;
+    color: rgb(11, 11, 112);
+}
+.cardItemBox2{
     width: 18rem;
     color: rgb(11, 11, 112);
 }
@@ -140,6 +144,7 @@
     border: none;
     outline: 1px solid #ddd;
 }
+
 .paymentComplete{
     margin: 1rem;
     padding: 0.7rem;
@@ -151,4 +156,83 @@
     color: #fff;
     font-weight: 600;
     cursor: pointer;
+}
+
+@media screen and (max-width:480px) {
+    .checkoutBox{
+        width: 90%;
+        background-color: rgb(232, 232, 240);
+        outline: 1px solid #ac9797;
+        padding: 1rem;
+        border-radius: 0.3rem;
+        margin: 1rem 0rem;
+    }
+    .form input{
+        padding: 0.4rem;
+        margin: 0.5rem;
+        width: 20rem;
+    }
+    .container{
+        flex-direction: column;
+    }
+    .imgAndNameBox{
+        flex-direction: column;
+    }
+    .cardItemImage{
+        height: 7rem;
+        width: 7rem;
+    }
+    .itemContainer{
+        width: 22rem;
+        margin: 1rem 0rem;
+    }
+    .checkoutBox{
+        margin: 1rem 0rem;
+    }
+    .cardItem{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        height: 11rem;
+    
+    }
+    .cartItemHeading{
+        margin: 0.7rem 0.2rem;
+        padding: 0.8rem;
+        width: 22.5rem;
+    }
+    .nametag{
+        font-size: 14px;
+        font-weight: 400;
+    }
+    .cardItemBox1{
+        width: 9.5rem;
+    }
+    
+    .checkoutButton{
+        width: 23rem;
+        padding: 0.5rem;
+        margin: 1rem 0rem 0rem 1rem;
+    }
+    .totalPrices{
+        margin: 1rem 0.2rem 0.2rem 0.2rem;
+    }
+    .paymentBox{
+        margin: 1rem;
+        padding: 0.5rem;
+        width: 20rem;
+    }
+    .checkoutBox{
+        width: 96%;
+        outline: 1px solid #ac9797;
+        padding: 0.5rem;
+        border-radius: 0.3rem;
+        margin: 1rem 0rem;
+    }
+    .paymentBox input{
+        width: 15rem;
+        padding: 0.3rem;
+        border-radius: 0.3rem;
+        margin: 0.3rem;
+    }
 }

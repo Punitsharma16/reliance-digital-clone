@@ -48,13 +48,12 @@ export const ProductDetails = ({productID})=>{
         }
       }
 
-
       const addItemToCart = async(id)=>{
         try {
           const res = await axios.patch(
             `https://academics.newtonschool.co/api/v1/ecommerce/cart/${id}`,
             {
-              "quantity": '2'
+              "quantity": '1'
             } ,
             {
                 headers: {
@@ -68,6 +67,16 @@ export const ProductDetails = ({productID})=>{
           navigate('/cartItem')
         } catch (error) {
           console.log(error);
+          navigate('/login')
+        }
+      }
+
+
+      const handleBuyNow = (token)=>{
+        if(!token){
+          navigate('/login');
+        }else{
+          navigate('/checkout');
         }
       }
 
@@ -77,27 +86,28 @@ export const ProductDetails = ({productID})=>{
           <aside className={style.imageContainer}>
             <img className={style.itemImage} src={displayImage} alt="iphone" />
             <div className={style.images}>
-              <button onClick={prevImages} disabled={StartIndex === 0}>prev</button>
+              <button className="hide" onClick={prevImages} disabled={StartIndex === 0}>prev</button>
               {
                 images?.slice(StartIndex,StartIndex+3).map((img,i)=>{
                   return (
                     <main key={i} className={style.images}>
-                  <img src={img} alt="img" /><br />
+                  <img className="hide" src={img} alt="img" /><br />
                   </main>
                   )
                 })
               }
-              <button onClick={nextImages} disabled={StartIndex+3 >= images?.length}>next</button>
+              <button className="hide" onClick={nextImages} disabled={StartIndex+3 >= images?.length}>next</button>
             </div>
           </aside>
+
           <aside>
             <div>
             <p style={{margin:'1rem 0rem',fontWeight:'600', fontSize:'19px'}}>{name}</p>
             <span> <img src={rating} alt="rating" /> <img src={rating} alt="rating" /> <img src={rating} alt="rating" /> ({ratings} Rating & Reviews)</span>
-            <span style={{margin:'2rem'}}><img src={share} alt="share" /> Share</span> <span><img src={print} alt="" /> Print</span>
+            <span style={{margin:'2rem'}}><img src={share} alt="share" /> Share</span> <span className="hide"><img src={print} alt="" /> Print</span>
             </div>
             
-            <aside style={{display:'flex'}}>
+            <aside className={style.asideConatiner} style={{display:'flex'}}>
             <section>
               <div className={style.offers}>
               <p style={{fontSize:'18px',fontWeight:'600'}}>Gain more with offers (1)</p>
@@ -106,22 +116,22 @@ export const ProductDetails = ({productID})=>{
               <p><img src={calender} alt="logo" /> EMIs (Credit Cards) from ₹2827.96/month.</p>
               </div>
               <div>
-                <p style={{fontSize:'18px',fontWeight:'600'}}>Warranty</p>
+                <p className="hide" style={{fontSize:'18px',fontWeight:'600'}}>Warranty</p>
                 <ul style={{marginTop:'1rem'}}>
                   <li><span style={{fontSize:'17px',fontWeight:'600'}}>Warranty : </span><span>1 Year manufacturer warranty</span></li>
                 </ul>
               </div>
               <div style={{marginTop:'1rem',marginBottom:'1rem'}}>
-                <p style={{fontSize:'18px',fontWeight:'600'}}>Key Features</p>
+                <p className="hide" style={{fontSize:'18px',fontWeight:'600'}}>Key Features</p>
                 {
                   features?.map((item,i)=>{
-                    return <p key={i}>{item}</p>
+                    return <p className="hide" key={i}>{item}</p>
                   })
                 }
                 {/* {features} */}
               </div>
 
-              <div>
+              <div className={style.returnPolicy}>
                 <p style={{fontSize:'18px',fontWeight:'600',marginBottom:'1rem'}}>Return Policy</p>
                 <ul>
                   <li style={{margin:'1rem 0rem 1rem 0rem'}}>For return eligibility. Read-T&C</li>
@@ -129,7 +139,9 @@ export const ProductDetails = ({productID})=>{
                 </ul>
               </div>
             </section>
-            <section style={{marginTop:'3rem',width:'20rem'}}>
+            </aside>
+          </aside>
+          <section style={{margin:'3rem 0rem 0rem 1rem',width:'20rem'}}>
               <span>Deal Price </span><span style={{color:'darkblue',fontSize:'18px',fontWeight:'600'}}>&#8377; {price}</span>
               <p style={{fontWeight:'600',margin:'1rem 0rem'}}>EMIs (Credit Cards) from ₹2827.96/month |</p>
               <h3>Free Shipping!</h3>
@@ -137,11 +149,9 @@ export const ProductDetails = ({productID})=>{
               <p><img src={star} alt="star" /> Delivery assurance is subject to our delivery locations staying open as per govt. regulations</p>
               <div style={{display:'flex'}}>
               <p onClick={(e)=>addItemToCart(_id)} style={{backgroundColor:'red'}} className={style.button}>ADD TO CART</p>
-              <button style={{backgroundColor:''}} className={style.button}>BUY NOW</button>
+              <button onClick={handleBuyNow} style={{backgroundColor:''}} className={style.button}>BUY NOW</button>
               </div>
             </section>
-            </aside>
-          </aside>
         </main>
 
 

@@ -6,3 +6,14 @@
 body{
     background-color: aliceblue;
 }
+
+@media screen and (max-width: 480px){
+    .hide{
+        /* visibility: hidden; */
+        display: none;
+    }
+    .image-slider img{
+        width: 100%;
+        height: 5.5rem;
+    }
+}

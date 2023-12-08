@@ -10,6 +10,7 @@ import { SountdItems } from "../items/soundItems";
 import { ImagesData } from "../items/images/otherImages";
 import { Kitchenappliances } from "../items/kitchenAppliances";
 import { Tablet } from "../items/tablet";
+import { MixItems } from "../items/MixItems/mixImages";
 
 export const HomePage = ({search,setProductID})=>{
     console.log(search);
@@ -32,6 +33,7 @@ export const HomePage = ({search,setProductID})=>{
             <ImagesData/>
             <Kitchenappliances/>
             <Tablet/>
+            <MixItems/>
         </main>
     )
 }

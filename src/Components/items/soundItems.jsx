@@ -1,12 +1,16 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import style from './laptop.module.css'
 import left from '../svgs/left.svg'
 import right from '../svgs/right.svg'
+import { ValContextNavbar } from "../../App";
+import { useNavigate } from "react-router-dom";
 
 export const SountdItems = ()=>{
     const [soundData,setSoundData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const {setProductID} = useContext(ValContextNavbar);
+    const navigate = useNavigate();
     const itemsPerPage = 5;
 
     const fetchData = async () => {
@@ -45,7 +49,11 @@ const startIndex = (currentPage - 1) * itemsPerPage;
 const endIndex = startIndex + itemsPerPage;
 const displayedData = soundData.slice(startIndex, endIndex);
 // console.log(displayedData);
-
+     
+const handleFilter = (e)=>{
+    setProductID(e.currentTarget.id)
+    navigate('/productDetails');
+   }
 
 
 
@@ -53,10 +61,10 @@ const displayedData = soundData.slice(startIndex, endIndex);
         <main style={{display:'flex',alignItems:'center',margin:'1rem 0rem',backgroundColor:'#fff',borderRadius:'0.5rem'}}>
             <button className={style.button} onClick={handleShowPrevious}><img src={left} alt="prev" /></button>
             {
-                displayedData.map((item)=>{
+                displayedData.map((item,i)=>{
                     return(
-                        <main key={item._id} className={style.mainContainer}>
-                            <section>
+                        <main key={item._id} className={ i%2===0 ? `hide ${style.mainContainer}` : `${style.mainContainer}`}>
+                            <section onClick={handleFilter} id={item._id}>
                                 <img className={style.img} src={item.displayImage} alt="" />
                                 <div className={style.divForName}>
                                     <p className={style.name}>{item.name}</p>

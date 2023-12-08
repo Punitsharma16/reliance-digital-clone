@@ -5,7 +5,7 @@
 }
 .section1{
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     justify-content: space-between;
 }
 .divSection1 p{
@@ -67,4 +67,22 @@
     font-size: 16px;
     padding: 0.5rem 2rem;
     border-radius: 0.3rem;
+}
+
+
+@media screen and (max-width:480px) {
+    .mainContainer{
+        padding: 1rem;
+    }
+    .section1{
+        display: flex;
+        justify-content: space-between;
+    }
+    .section2{
+        gap: 3rem;
+        margin-top: 1rem;
+    }
+    .section2Divs img{
+        height: 2rem;
+    }
 }

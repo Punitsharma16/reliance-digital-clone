@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import style from './login.module.css'
 
-export const Login = ({setShowLogin})=>{
+export const Login = ()=>{
     const navigate = useNavigate();
     const [isError,setIsError] = useState(false);
     const [showError, setShowError] = useState('');
@@ -33,7 +33,7 @@ export const Login = ({setShowLogin})=>{
                 console.log(responce.data.token);
                 sessionStorage.setItem("userInfo",JSON.stringify(responce.data.data));
                 setIsError(false)
-                setShowLogin(false);
+                // setShowLogin(false);
                 navigate('/')
             }
         } catch (error){
@@ -54,7 +54,7 @@ const submitForm = (e)=>{
             <aside className={style.formContainer}>
                 <div className={style.formContainerHeading}>
                     <p>Login</p>
-                    <button onClick={()=>setShowLogin(false)}>x</button>
+                    <button onClick={()=>navigate('/')}>x</button>
                 </div>
             <form className={style.form} onSubmit={submitForm}>
                 <label htmlFor="email">Email : </label>

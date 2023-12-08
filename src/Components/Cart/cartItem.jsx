@@ -20,7 +20,9 @@ export const CartItems = ()=>{
                 }
             })
                 console.log(responce.data.data);
+                sessionStorage.setItem('cartItems',JSON.stringify(responce.data.data));
                 setCartItem(responce.data.data);
+
         } catch (error) {
             console.log(error);
         }
@@ -29,7 +31,6 @@ export const CartItems = ()=>{
     useEffect(()=>{
         fetchCartItems();
     },[])
-
     const removeItemFromCart = async(id)=>{
         try {
             const res = await axios.delete(
@@ -53,7 +54,8 @@ export const CartItems = ()=>{
             setCartVal(cartItems)
             navigate('/checkout')
         }else{
-            alert('Your Cart is Empty');
+            // alert('Your Cart is Empty');
+            navigate('/login');
         }
     }
 
@@ -75,17 +77,17 @@ export const CartItems = ()=>{
                             return (
                                 <main className={style.itemContainer}  key={product._id}>
                                     <section className={style.cardItem}>
+                                        <aside className={style.imgAndNameBox}>
                                         <img className={style.cardItemImage} src={product.product.displayImage} alt="" />
-                                        <div className={style.cardItemBox}>
-                                            <p style={{fontWeight:'600',marginBottom:'0.5rem'}}>{product.product.name}</p>
-                                            <p>
+                                        <div className={style.cardItemBox1}>
+                                            <p className={style.nametag} style={{fontWeight:'600',marginBottom:'0.5rem'}}>{product.product.name}</p>
                                                 <img src={rating} alt="rating" />
                                                 <img src={rating} alt="rating" />
                                                 <img src={rating} alt="rating" />
                                                 <span style={{fontSize:'15px',fontWeight:'400',marginLeft:'0.5rem'}}>( {product.product.ratings} rating )</span>
-                                            </p>
                                         </div>
-                                        <div className={style.cardItemBox} style={{textAlign:'right'}}>
+                                        </aside>
+                                        <div className={style.cardItemBox2} style={{textAlign:'right'}}>
                                             <p style={{fontWeight:'600',fontSize:'17px',color:'#3d3d3d'}}>Price :&#x20B9; {product.product.price}</p>
                                             <p style={{fontWeight:'400',fontSize:'14px',color:'#3d3d3d'}}>Inclusive of all taxes</p>
                                             <p style={{fontSize:'14px',color:'aquamarin'}}>Free shipping</p>

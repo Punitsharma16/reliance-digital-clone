@@ -36,3 +36,30 @@
     font-weight: 700;
     font-size: 20px;
 }
+
+@media screen and (max-width:480px) {
+    .addImage{
+        height: 6rem;
+        width: 6rem;
+    }
+    .addItemDiv p{
+        font-weight: 500;
+        font-size: 13px;
+    }
+    .addItemDiv span{
+        color: rgb(252, 68, 12);
+        font-weight: 600;
+        font-size: 15px;
+    }
+    .addItemDiv{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0.3rem;
+    }
+    .addContiner{
+        flex-wrap: nowrap;
+    }
+    
+}

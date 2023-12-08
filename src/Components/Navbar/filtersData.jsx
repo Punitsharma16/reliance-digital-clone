@@ -2,7 +2,6 @@ import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { SendValToFilter } from "../../App";
 import style from '../ProductsData/products.module.css'
-import heart from '../svgs/heart.svg'
 import { useNavigate } from "react-router-dom";
 import { AddItemWishList } from "../WishList/addItemToWishlist";
 
@@ -78,9 +77,11 @@ export const FilteredData = ()=>{
               <main className={style.ProductsContainer}  key={i}>
                 <section onClick={handleId} id={data._id} className={style.productInfo}>
                 <img className={style.productImage} src={data.displayImage} alt="" />
+                <div>
                 <p className={style.productName}>{data.name}</p><br />
                 <p style={{color:'blue',fontWeight:'600'}}>&#x20B9; {data.price}</p><br />
                 <span className={style.offer}>OFFERS AVAILABLE</span>
+                </div>
                 </section>
                 {/* <div id={data._id} onClick={(e)=>addItemTowishlist(e.currentTarget.id)} className={style.wishList}>
                   <span><img src={heart} alt="" />Add to Wishlist</span>

@@ -25,3 +25,17 @@
   .nextButton {
     right: 10px;
   }
+
+  @media screen and (max-width:480px){
+    .img{
+      width: 100%;
+      height: 100%;
+    }
+    .contianer button{
+      padding: 0.2rem;
+      border: none;
+      height: 3rem;
+      width: 1rem;
+      cursor: pointer;
+    }
+  }

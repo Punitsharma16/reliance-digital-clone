@@ -49,11 +49,17 @@ export const AppNavbar = ()=>{
       navigate('/filterData');
     }
 
+    const handleTravel = ()=>{
+      setNavVal('travel');
+      navigate('filterData');
+    }
+
     const handleSearchInput = (e)=>{
       setSearchVal(e.target.value);
       // navigate('/searchItems')
     }
-
+    
+    
     useEffect(() => {
       const hideModal = (e) => {
         //   console.log("e.target", e.target);
@@ -78,20 +84,28 @@ export const AppNavbar = ()=>{
         // console.log('login');
       }
     }
+
+    const handleCart = (token)=>{
+      if(token){
+        navigate('/cartItem')
+      }else{
+        navigate('/login')
+      }
+    }
     return(
         <main>
             <section className={style.navbarHeading}>
-                <div>OUR BRAND PROMISE</div>
+                <div className="hide">OUR BRAND PROMISE</div>
                 <hr className={style.hr} />
                 <div className={style.navFilter} onClick={()=>navigate('/contact')}>CONTACT US</div>
                 <hr className={style.hr} />
-                <div>NEXT DAY DELIVERY</div>
+                <div className="hide">NEXT DAY DELIVERY</div>
             </section>
             <section className={style.searchBar}>
                 <Link to='/'><img className={style.logo} src="https://www.reliancedigital.in/build/client/images/loaders/rd_logo.svg" alt="" /></Link>
                 <input type="text" name="seacrh" id="search" onChange={handleSearchInput} placeholder="Find your favorite prodcut" />
                 <div style={{gap:'1rem'}}>
-                    <span onClick={()=>navigate('/cartItem')} style={{color:'white',fontWeight:'600',cursor:'pointer',position:'relative'}}><img src={cart} alt="" />Cart</span>
+                    <span onClick={()=>handleCart(token)} style={{color:'white',fontWeight:'600',cursor:'pointer',position:'relative'}}><img src={cart} alt="" />Cart</span>
                     <span onClick={()=>handleProfileIcon(token)} ref={iconRef} style={{color:'white',fontWeight:'600',cursor:'pointer',marginLeft:'1rem'}}> <img src={login} alt="" />{token ? `${username}` : ' Login'}</span>
                     { showModal &&
                         <section className={style.authModal}>
@@ -106,8 +120,9 @@ export const AppNavbar = ()=>{
                     <span className={style.navFilter} onClick={handleTablet}>TABLET</span>
                     <span className={style.navFilter} onClick={handleTv}>TELEVISION</span>
                     <span className={style.navFilter} onClick={handleAC}>AC</span>
-                    <span className={style.navFilter} onClick={handleKitchen}>KITCHEN APPLIANSES</span>
-                    <span className={style.navFilter} onClick={handleRefrigerator}>REFRIGERATERS</span>
+                    <span className={`hide ${style.navFilter}`} onClick={handleKitchen}>KITCHEN APPLIANSES</span>
+                    <span className={`hide ${style.navFilter}`} onClick={handleRefrigerator}>REFRIGERATERS</span>
+                    <span className={style.navFilter} onClick={handleTravel}>TRAVEL</span>
                 </div>
             </section>
             <SearchData/>

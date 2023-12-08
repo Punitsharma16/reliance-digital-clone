@@ -3,13 +3,13 @@ import { useContext, useEffect, useState } from "react";
 import style from './laptop.module.css'
 import left from '../svgs/left.svg'
 import right from '../svgs/right.svg'
-import { SendValToFilter } from "../../App";
+import { SendValToFilter, ValContextNavbar } from "../../App";
 import { useNavigate } from "react-router-dom";
 
 export const Laptop = ()=>{
     const [tvData,setTvData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    // const {setProductID} = useContext(SendValToFilter);
+    const {setProductID} = useContext(ValContextNavbar);
     const navigate = useNavigate();
     const itemsPerPage = 5;
 
@@ -52,7 +52,7 @@ console.log(displayedData);
 
 
   const handleFilter = (e)=>{
-    // setProductID(e.currentTarget.id)
+    setProductID(e.currentTarget.id)
     navigate('/productDetails');
   }
 
@@ -63,10 +63,10 @@ console.log(displayedData);
         <main style={{display:'flex',alignItems:'center',margin:'1rem 0rem',backgroundColor:'#fff',borderRadius:'0.5rem'}}>
             <button className={style.button} onClick={handleShowPrevious}><img src={left} alt="prev" /></button>
             {
-                displayedData.map((item)=>{
+                displayedData.map((item,i)=>{
                     return(
-                        <main key={item._id} className={style.mainContainer}>
-                            <section>
+                        <main key={item._id} className={ i%2===0 ? `hide ${style.mainContainer}` : `${style.mainContainer}`}>
+                            <section onClick={handleFilter} id={item._id}>
                                 <img className={style.img} src={item.displayImage} alt="" />
                                 <div className={style.divForName}>
                                     <p className={style.name}>{item.name}</p>

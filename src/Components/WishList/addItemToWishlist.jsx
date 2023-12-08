@@ -31,8 +31,8 @@ export const AddItemWishList = ({id})=>{
             alert('Already added in wishlist');
         }
     }else{
-                // navigate('/login')
-               setShowLogin(true);
+                navigate('/login')
+            //    setShowLogin(true);
         }
    }
     return(
@@ -40,7 +40,7 @@ export const AddItemWishList = ({id})=>{
             <div id={id} onClick={(e)=>addItemTowishlist(e.currentTarget.id)} className={style.wishlistClick}>
                 <span><img src={heart} alt="heart" />Add to Wishlist</span>
             </div>
-            {showLogin && <Login setShowLogin={setShowLogin}/>}
+            {/* {showLogin && <Login setShowLogin={setShowLogin}/>} */}
         </main>
     )
 }

@@ -1,0 +1,18 @@
+.mainContainer{
+    display: flex;
+}
+.sideDiv{
+    padding: 0.8rem;
+    background-color: white;
+    outline: 1px solid #bdbbbb;
+    width: 10rem;
+    text-align: center;
+}
+.orderDiv{
+    margin: 1rem 0rem 0rem 2rem;
+    background-color: #ffffff;
+    padding: 1rem;
+    outline: 1px solid #bdbbbb;
+    border-radius: 0.5rem;
+    width: 50rem;
+}

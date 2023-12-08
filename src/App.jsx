@@ -15,6 +15,7 @@ import { WishList } from './Components/WishList/wishlist';
 import { CartItems } from './Components/Cart/cartItem';
 import { Checkout } from './Components/Checkout/checkout';
 import { ProfileModal } from './Components/Profile/profileModal';
+import { MyOrder } from './Components/Orders/myOrder/myorder';
 
 export const ItemValContext = createContext();
 export const SendValToProduct = createContext();
@@ -67,6 +68,7 @@ function App() {
               <CartItems/>
           </CartItemsData.Provider>
       }/>
+      <Route path='/myOrders' element={<MyOrder/>}/>
         <Route path='/checkout' element={
               <Checkout cartVal={cartVal}/>
         }/>

@@ -51,14 +51,14 @@ export const Footer = ()=>{
                     <p onClick={handleRefrigerator}>Refrigerators</p>
                     <p onClick={handleKitchen}>Kitchen Appliances</p>
                 </div>
-                <div className={style.divSection1}>
+                <div className={`hide {style.divSection1}`}>
                     <h4>SITE INFO</h4>
                     <p onClick={()=>setShowModel(true)}>About Reliance Digital</p>
                     <p onClick={()=>setShowModel(true)}>Site Map</p>
                     <p onClick={()=>setShowModel(true)}>Gift Cards</p>
                     <p onClick={()=>setShowModel(true)}>Contact Us</p>
                 </div>
-                <div className={style.divSection1}>
+                <div className={` hide {style.divSection1}`}>
                     <h4>RESOURCES CENTER</h4>
                     <p onClick={()=>setShowModel(true)}>Product Reviews</p>
                     <p onClick={()=>setShowModel(true)}>Buying Guides</p>

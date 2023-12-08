@@ -63,3 +63,43 @@
 .descriptionImage img{
     width: 25rem;
 }
+
+@media screen and (max-width:480px) {
+    .itemImage{
+        height: 12rem;
+    }
+    .images img{
+        height: 10rem;
+        width: 10rem;
+    }
+    .imageContainer{
+        width: 21rem;
+        display: flex;
+        flex-direction: column;
+    }
+    .postDetailContainer{
+        display: flex;
+        flex-direction: column;
+        margin-right: 0rem;
+    }
+    .asideConatiner{
+        width: 20rem;
+        margin: 1rem;
+    }
+    .descriptionImage img{
+        width: 20rem;
+    }
+    .offers{
+        height: 15rem;
+        width: 21rem;
+        display: flex;
+        flex-direction: column;
+        /* align-items: center; */
+        justify-content: center;
+        gap: 1rem;
+    }
+    .returnPolicy{
+        width: 21rem;
+        margin-left: 1rem;
+    }
+}
