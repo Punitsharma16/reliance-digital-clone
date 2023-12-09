@@ -8,6 +8,7 @@
     width: 11rem;
     padding: 0.5rem;
     transition: box-shadow 0.1s;
+    background-color: white;
 }
 .name{
     overflow: hidden;

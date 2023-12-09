@@ -118,6 +118,9 @@
     cursor: pointer;
     border-radius: 0.3rem;
 }
+.imgAndNameBox{
+    display: flex;
+}
 .orderTotal{
     display: flex;
     justify-content: space-between;
@@ -156,6 +159,16 @@
     color: #fff;
     font-weight: 600;
     cursor: pointer;
+}
+  .paymentBox input[type="number"]::-webkit-outer-spin-button,
+  .paymentBox input[type="number"]::-webkit-inner-spin-button {
+        display: none;
+      }
+
+  
+      .paymentBox input[type="month"]::-webkit-inner-spin-button,
+      .paymentBox input[type="month"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
 }
 
 @media screen and (max-width:480px) {

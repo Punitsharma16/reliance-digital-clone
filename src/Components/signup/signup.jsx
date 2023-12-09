@@ -5,6 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 
 export const SignUp = ()=>{
     const navigate = useNavigate();
+    const [isError,setIsError] = useState(false)
+    const [error,setError] = useState();
     const [userInfo,setUserInfo] = useState({
         name:'',
         email:'',
@@ -28,12 +30,15 @@ export const SignUp = ()=>{
             )
             if(responce.data.token){
                 sessionStorage.setItem("authToken",responce.data.token);
-                console.log(responce.data.token);
+                // console.log(responce);
                 sessionStorage.setItem("userInfo",JSON.stringify(responce.data.data.user));
-                // navigate('/');
+                setIsError(false);
+                alert('Created Successfully');
+                navigate('/login');
             }
         } catch (error) {
-            console.log(error);
+            setIsError(true);
+            setError(error.response.data.message);
         }
     }
 
@@ -59,6 +64,7 @@ export const SignUp = ()=>{
             <br />
             <label htmlFor="password">Password : </label>
             <input type="password" name="password" value={userInfo.password} onInput={handleInfo} id="password" placeholder="Create a password" />
+            {isError && <p style={{color:'red'}}>{`* ${error}`}</p>}
             <br />
             <input type="submit" value="Submit" />
             </form>

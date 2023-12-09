@@ -20,7 +20,8 @@ export const CartItems = ()=>{
                 }
             })
                 console.log(responce.data.data);
-                sessionStorage.setItem('cartItems',JSON.stringify(responce.data.data));
+          sessionStorage.setItem('cartItems',JSON.stringify(responce.data.data));
+
                 setCartItem(responce.data.data);
 
         } catch (error) {

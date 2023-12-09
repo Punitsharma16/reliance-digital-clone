@@ -1,14 +1,17 @@
-import { useContext, useEffect, useState } from 'react'
+import {useEffect, useState } from 'react'
 import style from './checkout.module.css'
 import rating from '../svgs/rating.svg'
 import { Payment } from '../Orders/PayementModal/paymentModel';
-export const Checkout = ()=>{
+import axios from 'axios';
+export const Checkout = ({setValFromCheckout})=>{
     const [addressModal,setAddressModal] = useState(false);
     const [showAddress,setShowAddress] = useState(false);
     const [showOrder,setShowOrder] = useState(false);
     const [showPayment,setShowPayment] = useState(false);
     const [cartData,setCartData] = useState({});
     const [paymentModel,setPaymentModel] = useState(false);
+    // const {setValFromCheckout} = useContext(SendCheckoutToMyOrders)
+    const token = sessionStorage.getItem('authToken');
     // console.log(cartVal);
     const [address,setAddress] = useState({
         pincode:'',
@@ -33,12 +36,35 @@ export const Checkout = ()=>{
 
     useEffect(()=>{
         const data = sessionStorage.getItem('cartItems');
-    const parseData = JSON.parse(data);
-    setCartData(parseData);
+        const parseData = JSON.parse(data);
+        setCartData(parseData);
     },[]);
     
     console.log(cartData);
 
+
+    const clearCart = async ()=>{
+        try {
+            const responce = await axios.delete('https://academics.newtonschool.co/api/v1/ecommerce/cart',
+            {
+                headers: {
+                "Authorization" : `Bearer ${token}`,
+                 "projectID" : 'f2wxvt7cmknp'
+            }
+        })
+        console.log(responce);
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    const handlePaymentForm = (e)=>{
+        e.preventDefault();
+        setValFromCheckout(true);
+        setPaymentModel(true);
+        clearCart();
+    }
 
     return(
         <main>
@@ -105,6 +131,32 @@ export const Checkout = ()=>{
                             )
                         })
                     }
+                    {
+                        <main className={style.itemContainer}  key={cartData._id}>
+                        <section className={style.cardItem}>
+                              <aside className={style.imgAndNameBox}>
+                            <img className={style.cardItemImage} src={cartData.displayImage} alt="" />
+                            <div className={style.cardItemBox1}>
+                                <p style={{fontWeight:'600',marginBottom:'0.5rem'}}>{cartData.name}</p>
+                                <p>
+                                    <img src={rating} alt="rating" />
+                                    <img src={rating} alt="rating" />
+                                    <img src={rating} alt="rating" />
+                                    <span style={{fontSize:'15px',fontWeight:'400',marginLeft:'0.5rem'}}>( {cartData.ratings} rating )</span>
+                                </p>
+                            </div>
+                                </aside>
+                            <div className={style.cardItemBox2} style={{textAlign:'right'}}>
+                                <p style={{fontWeight:'600',fontSize:'17px',color:'#3d3d3d'}}>Price :&#x20B9; {cartData.price}</p>
+                                <p style={{fontWeight:'400',fontSize:'14px',color:'#3d3d3d'}}>Inclusive of all taxes</p>
+                                <p style={{fontSize:'14px',color:'aquamarin'}}>Free shipping</p>
+                                <p style={{fontSize:'14px',color:'rgb(11, 11, 112)',margin:'0.3rem 0rem'}}>Standard Delivery : <span> Before 3 days </span></p>
+                                <p style={{fontSize:'13px',fontWeight:'600',color:'#3d3d3d'}}>*Delivery assurance is subject to our <br />delivery
+                                 locations staying open <br /> as per govt. regulations</p>
+                            </div>
+                        </section>
+                    </main>
+                    }
 
                 <div className={style.orderTotal}>
                     <p>Order Total</p>
@@ -114,7 +166,6 @@ export const Checkout = ()=>{
                     <p style={{fontSize:'13px'}}>*In order to authenticate and redeem Store Credit or ROne Loyalty Points an OTP validation shall be required. Post successful OTP verification, further payment if any shall be facilitated.</p>
                     <button onClick={()=>setShowPayment(true)} className={style.paymentButton}>PROCEED TO PAYMENT</button>
                 </div>
-                
                 </section>
                 }
             </section>
@@ -133,21 +184,22 @@ export const Checkout = ()=>{
                     </div>
                     
                     <hr />
-                     <form  className={style.paymentBox}>
+                     <form onSubmit={handlePaymentForm}  className={style.paymentBox}>
                           <section>
-                               <input type="number" name="debitCardNo" id="debitCardNo" placeholder='Enter Card Number' required/><br />
+                               <input type="number" name="debitCardNo" id="debitCardNo" minLength='16' maxLength="16" placeholder='Enter Card Number' required/><br />
                                <input type="text" name="nameOnCard" id="nameOnCard" placeholder='Enter Name on Card'required/> <br />
                               <label style={{marginLeft:'0.7rem'}} htmlFor="date">Expire Date</label>
                                <br />
-                              <input style={{width:'5rem'}} type="date" name="month" id="month" required/>
-                              <input style={{width:'5rem'}} type="date" name="year" id="year" required/>
-                              <input style={{width:'5rem'}} type="number" name="cvv" id="cvv"  placeholder='CVV' required/>
+                              <input style={{width:'5rem'}} type="month" name="month" id="month" min="2019-01" max="2028-12" required/>
+                              <input style={{width:'5rem'}} type="month" name="year" id="year" min="2019-01" max="2028-12" required/>
+                              <input style={{width:'5rem'}} type="number" name="cvv" id="cvv" maxLength="3"  placeholder='CVV' required/>
                           </section>
                             <p style={{fontSize:'12px',marginLeft:'0.7rem'}}>*Clicking on “Pay” will take you to a secure payment gateway where you can make your payment.
                                  Your order will not be completed without this action</p>
                             <input style={{width:'1rem'}} type="checkbox" name="check" id="check" required />
                             <label style={{fontSize:'14px'}} htmlFor="check">I agree to the Term & Conditions</label><br />
-                            <button onClick={()=>setPaymentModel(true)} className={style.paymentComplete}>PAY RS. {cartData.totalPrice}</button>
+                            {/* <button onClick={()=>setPaymentModel(true)} className={style.paymentComplete}>PAY RS. {cartData.totalPrice}</button> */}
+                            <input type="submit" value={`PAY RS. ${cartData.totalPrice}`} className={style.paymentComplete} />
                      </form>
                      </main>
                      }

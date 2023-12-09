@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import style from './productDetails.module.css'
 import rating from '../svgs/rating.svg'
 import share from '../svgs/share.svg'
@@ -8,11 +8,13 @@ import tag from '../svgs/tag.svg'
 import calender from '../svgs/calender.svg'
 import star from '../svgs/star.svg'
 import { useNavigate } from "react-router-dom";
+// import { SendValToProduct } from "../../App";
 
-export const ProductDetails = ({productID})=>{
+export const ProductDetails = ({productID,setCartVal})=>{
   const [productDetails,setProductDetails] = useState({});
   const token = sessionStorage.getItem("authToken")
   const navigate = useNavigate();
+  // const {setCartVal} = useContext(SendValToProduct)
   const [StartIndex,setStartIndex] = useState(0);
   const prevImages = ()=>{
     setStartIndex(StartIndex - 3);
@@ -28,7 +30,9 @@ export const ProductDetails = ({productID})=>{
       
           // Handle the response data here
           console.log(response.data.data);
-          setProductDetails(response.data.data)
+          sessionStorage.setItem('cartItems',JSON.stringify(response.data.data));
+          setProductDetails(response.data.data);
+          // setCartVal(response.data.data)
         } catch (error) {
           // Handle any errors here
           console.error(error);
@@ -72,7 +76,7 @@ export const ProductDetails = ({productID})=>{
       }
 
 
-      const handleBuyNow = (token)=>{
+      const handleBuyNow = (token,_id)=>{
         if(!token){
           navigate('/login');
         }else{
@@ -149,7 +153,7 @@ export const ProductDetails = ({productID})=>{
               <p><img src={star} alt="star" /> Delivery assurance is subject to our delivery locations staying open as per govt. regulations</p>
               <div style={{display:'flex'}}>
               <p onClick={(e)=>addItemToCart(_id)} style={{backgroundColor:'red'}} className={style.button}>ADD TO CART</p>
-              <button onClick={handleBuyNow} style={{backgroundColor:''}} className={style.button}>BUY NOW</button>
+              <button onClick={()=>handleBuyNow(_id)} style={{backgroundColor:''}} className={style.button}>BUY NOW</button>
               </div>
             </section>
         </main>

@@ -23,17 +23,20 @@ export const ValContextNavbar = createContext();
 export const SendValToFilter = createContext();
 export const SendValToSearchData = createContext();
 export const CartItemsData = createContext();
+export const SendCheckoutToMyOrders = createContext();
 function App() {
   const [itemVal,setItemVal] = useState('');
   const [navVal,setNavVal] = useState('');
   const [search,setSearchVal] = useState('thev');
   const [productID,setProductID] = useState('');
   const [cartVal,setCartVal] = useState();
+  const [valFromCheckout,setValFromCheckout] = useState(false);
   console.log(navVal);
   console.log(itemVal);
   console.log(search);
   console.log(productID);
   console.log(cartVal);
+  console.log(valFromCheckout);
   return (
     <div className="App">
       <Routes>
@@ -61,16 +64,22 @@ function App() {
         }/>
         <Route path='/contact' element={<Contact/>}/>
         {/* <Route path='/searchItems' element={<SearchData searchVal={search} setProductID={setProductID} />}/> */}
-        <Route path='/productDetails' element={<ProductDetails productID={productID}/>}/>
+        <Route path='/productDetails' element={<ProductDetails setCartVal={setCartVal} productID={productID}/>}/>
         <Route path='/wishlist' element={<WishList productID={productID}/>}/>
         <Route path='/cartItem' element={
           <CartItemsData.Provider value={{setCartVal}}>
               <CartItems/>
           </CartItemsData.Provider>
       }/>
-      <Route path='/myOrders' element={<MyOrder/>}/>
+      <Route path='/myOrders' element={
+        <SendCheckoutToMyOrders.Provider>
+             <MyOrder valFromCheckout={valFromCheckout}/>
+        </SendCheckoutToMyOrders.Provider>
+      }/>
         <Route path='/checkout' element={
-              <Checkout cartVal={cartVal}/>
+          <SendCheckoutToMyOrders.Provider>
+              <Checkout setValFromCheckout={setValFromCheckout} cartVal={cartVal}/>
+          </SendCheckoutToMyOrders.Provider>
         }/>
         </Route>
         {/* <Route path='/profile' element={<ProfileModal/>}/> */}
