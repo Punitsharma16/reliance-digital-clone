@@ -3,7 +3,8 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    background-color: aliceblue;
+    /* background-color: aliceblue; */
+    background-color: #f1f1f1;
 }
 .ProductsContainer{
     display: flex;

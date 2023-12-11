@@ -2,17 +2,39 @@
     display: flex;
 }
 .sideDiv{
-    padding: 0.8rem;
+    padding: 1rem;
     background-color: white;
-    outline: 1px solid #bdbbbb;
-    width: 10rem;
+    outline: 1px solid #ddd;
+    width: 13rem;
     text-align: center;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    margin: 0rem 1rem;
+    font-weight: 600;
+}
+.sideDiv img{
+    margin-right: 1rem;
+}
+.div1{
+    background-color: white;
+    padding: 1rem;
+    width: 13rem;
+    outline: 1px solid #ddd;
+    margin: 1rem;
+    border-radius: 0.3rem;
 }
 .orderDiv{
     margin: 1rem 0rem 0rem 2rem;
     background-color: #ffffff;
     padding: 1rem;
-    outline: 1px solid #bdbbbb;
+    outline: 1px solid #ddd;
     border-radius: 0.5rem;
     width: 50rem;
+}
+
+@media screen and (max-width:480px) {
+    .orderDiv{
+        width: 22.5rem;
+        margin: 1rem 0rem 0rem 1rem;
+    }
 }

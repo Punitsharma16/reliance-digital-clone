@@ -3,7 +3,7 @@ import style from './checkout.module.css'
 import rating from '../svgs/rating.svg'
 import { Payment } from '../Orders/PayementModal/paymentModel';
 import axios from 'axios';
-export const Checkout = ({setValFromCheckout})=>{
+export const Checkout = ({setValFromCheckout,buyNow})=>{
     const [addressModal,setAddressModal] = useState(false);
     const [showAddress,setShowAddress] = useState(false);
     const [showOrder,setShowOrder] = useState(false);
@@ -63,7 +63,7 @@ export const Checkout = ({setValFromCheckout})=>{
         e.preventDefault();
         setValFromCheckout(true);
         setPaymentModel(true);
-        clearCart();
+        // clearCart();
     }
 
     return(
@@ -131,7 +131,7 @@ export const Checkout = ({setValFromCheckout})=>{
                             )
                         })
                     }
-                    {
+                    { buyNow &&
                         <main className={style.itemContainer}  key={cartData._id}>
                         <section className={style.cardItem}>
                               <aside className={style.imgAndNameBox}>
@@ -186,12 +186,13 @@ export const Checkout = ({setValFromCheckout})=>{
                     <hr />
                      <form onSubmit={handlePaymentForm}  className={style.paymentBox}>
                           <section>
-                               <input type="number" name="debitCardNo" id="debitCardNo" minLength='16' maxLength="16" placeholder='Enter Card Number' required/><br />
+                               {/* <input type="number" name="debitCardNo" id="debitCardNo" pattern='\d{4}' maxlength='16' placeholder='Enter Card Number' required/> */}
+                               <input type="number" inputmode="numeric" pattern="[0-4\s]{1,5}" maxlength="16" placeholder="xxxx xxxx xxxx xxxx" required /><br />
                                <input type="text" name="nameOnCard" id="nameOnCard" placeholder='Enter Name on Card'required/> <br />
                               <label style={{marginLeft:'0.7rem'}} htmlFor="date">Expire Date</label>
                                <br />
-                              <input style={{width:'5rem'}} type="month" name="month" id="month" min="2019-01" max="2028-12" required/>
-                              <input style={{width:'5rem'}} type="month" name="year" id="year" min="2019-01" max="2028-12" required/>
+                              <input style={{width:'8rem'}} type="month" name="month" id="month" min="2019-01" max="2028-12" required/>
+                              {/* <input style={{width:'5rem'}} type="month" name="year" id="year" min="2019-01" max="2028-12" required/> */}
                               <input style={{width:'5rem'}} type="number" name="cvv" id="cvv" maxLength="3"  placeholder='CVV' required/>
                           </section>
                             <p style={{fontSize:'12px',marginLeft:'0.7rem'}}>*Clicking on “Pay” will take you to a secure payment gateway where you can make your payment.
@@ -199,7 +200,7 @@ export const Checkout = ({setValFromCheckout})=>{
                             <input style={{width:'1rem'}} type="checkbox" name="check" id="check" required />
                             <label style={{fontSize:'14px'}} htmlFor="check">I agree to the Term & Conditions</label><br />
                             {/* <button onClick={()=>setPaymentModel(true)} className={style.paymentComplete}>PAY RS. {cartData.totalPrice}</button> */}
-                            <input type="submit" value={`PAY RS. ${cartData.totalPrice}`} className={style.paymentComplete} />
+                            <input type="submit" value={`PAY AMOUNT`} className={style.paymentComplete} />
                      </form>
                      </main>
                      }

@@ -111,7 +111,7 @@
     }
     .itemContainer{
         width: 22.5rem;
-        margin: 0.7rem 0.2rem;
+        margin: 0.7rem 0rem 0.5rem 1rem;
     }
     .cardItem{
         display: flex;

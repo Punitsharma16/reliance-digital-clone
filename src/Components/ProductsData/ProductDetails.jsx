@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from './productDetails.module.css'
 import rating from '../svgs/rating.svg'
 import share from '../svgs/share.svg'
@@ -8,9 +8,11 @@ import tag from '../svgs/tag.svg'
 import calender from '../svgs/calender.svg'
 import star from '../svgs/star.svg'
 import { useNavigate } from "react-router-dom";
+import right from '../svgs/right.svg'
+import left from '../svgs/left.svg'
 // import { SendValToProduct } from "../../App";
 
-export const ProductDetails = ({productID,setCartVal})=>{
+export const ProductDetails = ({productID,setOrderVal,setBuyNow})=>{
   const [productDetails,setProductDetails] = useState({});
   const token = sessionStorage.getItem("authToken")
   const navigate = useNavigate();
@@ -42,6 +44,7 @@ export const ProductDetails = ({productID,setCartVal})=>{
     useEffect(()=>{
          fetchProductDetails(productID);
      },[productID])
+     console.log(productID);
 
           // console.log(productDetails.brand);
       const {brand,displayImage,features, images,name,price,ratings,reviews,seller,description,_id} = productDetails;
@@ -80,6 +83,7 @@ export const ProductDetails = ({productID,setCartVal})=>{
         if(!token){
           navigate('/login');
         }else{
+          setBuyNow(true);
           navigate('/checkout');
         }
       }
@@ -90,17 +94,17 @@ export const ProductDetails = ({productID,setCartVal})=>{
           <aside className={style.imageContainer}>
             <img className={style.itemImage} src={displayImage} alt="iphone" />
             <div className={style.images}>
-              <button className="hide" onClick={prevImages} disabled={StartIndex === 0}>prev</button>
+              <button className="hide" onClick={prevImages} disabled={StartIndex === 0}> <img style={{height:'1rem',width:'1rem',padding:'1rem 0rem'}} src={left} alt="prev" /></button>
               {
                 images?.slice(StartIndex,StartIndex+3).map((img,i)=>{
                   return (
                     <main key={i} className={style.images}>
-                  <img className="hide" src={img} alt="img" /><br />
-                  </main>
+                        <img className="hide" src={img} alt="img" /><br />
+                    </main>
                   )
                 })
               }
-              <button className="hide" onClick={nextImages} disabled={StartIndex+3 >= images?.length}>next</button>
+              <button className="hide" onClick={nextImages} disabled={StartIndex+3 >= images?.length}> <img style={{height:'1rem',width:"1rem",padding:'1rem 0rem'}} src={right} alt="next" /></button>
             </div>
           </aside>
 
@@ -120,7 +124,7 @@ export const ProductDetails = ({productID,setCartVal})=>{
               <p><img src={calender} alt="logo" /> EMIs (Credit Cards) from ₹2827.96/month.</p>
               </div>
               <div>
-                <p className="hide" style={{fontSize:'18px',fontWeight:'600'}}>Warranty</p>
+                {/* <p className="hide" style={{fontSize:'18px',fontWeight:'600'}}>Warranty</p> */}
                 <ul style={{marginTop:'1rem'}}>
                   <li><span style={{fontSize:'17px',fontWeight:'600'}}>Warranty : </span><span>1 Year manufacturer warranty</span></li>
                 </ul>

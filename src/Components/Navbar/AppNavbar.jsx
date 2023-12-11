@@ -6,11 +6,11 @@ import { useContext, useEffect, useRef, useState } from "react"
 import { ValContextNavbar } from "../../App"
 import { SearchData } from "../HomePage/searchData"
 import { ProfileModal } from "../Profile/profileModal"
-import { Login } from "../login/login"
 
 export const AppNavbar = ()=>{
     const {setNavVal,setSearchVal} = useContext(ValContextNavbar)
     const [showModal,setShowModal] = useState(false);
+    // const [searchInputVal,setSearchInputVal] = useState('');
     const iconRef = useRef(null);
     const navigate = useNavigate();
     const token = sessionStorage.getItem('authToken')
@@ -56,8 +56,9 @@ export const AppNavbar = ()=>{
 
     const handleSearchInput = (e)=>{
       setSearchVal(e.target.value);
-      // navigate('/searchItems')
+      navigate('/searchItem')
     }
+    // console.log(searchInputVal);
     
     
     useEffect(() => {
@@ -104,6 +105,7 @@ export const AppNavbar = ()=>{
             <section className={style.searchBar}>
                 <Link to='/'><img className={style.logo} src="https://www.reliancedigital.in/build/client/images/loaders/rd_logo.svg" alt="" /></Link>
                 <input type="text" name="seacrh" id="search" onChange={handleSearchInput} placeholder="Find your favorite prodcut" />
+                {/* <button onClick={handleSearchInput}>Search</button> */}
                 <div style={{gap:'1rem'}}>
                     <span onClick={()=>handleCart(token)} style={{color:'white',fontWeight:'600',cursor:'pointer',position:'relative'}}><img src={cart} alt="" />Cart</span>
                     <span onClick={()=>handleProfileIcon(token)} ref={iconRef} style={{color:'white',fontWeight:'600',cursor:'pointer',marginLeft:'1rem'}}> <img src={login} alt="" />{token ? `${username}` : ' Login'}</span>

@@ -53,7 +53,7 @@ export const SignUp = ()=>{
         <main className={style.formContainer}>
             <div className={style.formContainerHeading}>
                 <p>Register New Account</p>
-                <button>X</button>
+                <button onClick={()=>navigate('/login')}>X</button>
             </div>
             <form className={style.form} onSubmit={submitForm}>
             <label htmlFor="name">Name : </label>
@@ -66,7 +66,7 @@ export const SignUp = ()=>{
             <input type="password" name="password" value={userInfo.password} onInput={handleInfo} id="password" placeholder="Create a password" />
             {isError && <p style={{color:'red'}}>{`* ${error}`}</p>}
             <br />
-            <input type="submit" value="Submit" />
+            <input style={{cursor:'pointer'}} type="submit" value="Submit" />
             </form>
             <p>Already Registered? <Link to='/login' style={{fontWeight:'600'}}>LOGIN</Link></p>
         </main>

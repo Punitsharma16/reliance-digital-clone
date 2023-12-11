@@ -3,7 +3,7 @@ import style from './images.module.css'
 import { ValContextNavbar } from '../../../App'
 import { useNavigate } from 'react-router-dom'
 export const ImagesData = ()=>{
-    const {setItemVal} = useContext(ValContextNavbar)
+    const {setItemVal} = useContext(ValContextNavbar);
     const navigate = useNavigate();
     const handleLaptop = ()=>{
         setItemVal('laptop');

@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import style from './laptop.module.css'
 import left from '../svgs/left.svg'
 import right from '../svgs/right.svg'
-import { SendValToFilter, ValContextNavbar } from "../../App";
+import {ValContextNavbar } from "../../App";
 import { useNavigate } from "react-router-dom";
 
 export const Laptop = ()=>{

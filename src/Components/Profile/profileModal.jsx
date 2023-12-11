@@ -5,7 +5,7 @@ export const ProfileModal = ()=>{
     return(
         <main className={style.container}>
                 <section>
-            <div onClick={()=>navigate('/profile')} className={style.box}>
+            <div onClick={()=>navigate('/myProfile')} className={style.box}>
                 <p>My Profile</p>
             </div>
             <hr />

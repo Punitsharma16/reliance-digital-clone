@@ -56,7 +56,7 @@ export const Footer = ()=>{
                     <p onClick={()=>setShowModel(true)}>About Reliance Digital</p>
                     <p onClick={()=>setShowModel(true)}>Site Map</p>
                     <p onClick={()=>setShowModel(true)}>Gift Cards</p>
-                    <p onClick={()=>setShowModel(true)}>Contact Us</p>
+                    <p onClick={()=>navigate('/contact')}>Contact Us</p>
                 </div>
                 <div className={` hide ${style.divSection1}`}>
                     <h4>RESOURCES CENTER</h4>

@@ -1,7 +1,4 @@
-import { useState } from "react";
 import { AddHolder } from "./AddHome/addHolder"
-import ImageSlider from "./imageSlider"
-import { SearchData } from "./searchData"
 import { Images } from "./imageBar";
 import { Laptop } from "../items/laptops";
 import { Mobile } from "../items/mobile";
@@ -12,8 +9,8 @@ import { Kitchenappliances } from "../items/kitchenAppliances";
 import { Tablet } from "../items/tablet";
 import { MixItems } from "../items/MixItems/mixImages";
 
-export const HomePage = ({search,setProductID})=>{
-    console.log(search);
+export const HomePage = ({search})=>{
+    // console.log(search);
     // const [state,setState] = useState(true);
     // if(search === 'val' || search === ''){
     //     setState(true);
@@ -22,11 +19,12 @@ export const HomePage = ({search,setProductID})=>{
     // }
     return(
         <main>
-            <ImageSlider/>
+            {/* <ImageSlider/> */}
+            <div className="hide">
             <Images/>
+            </div>
             <Mobile/>
             <Laptop/>
-            <SearchData searchVal={search} setProductID={setProductID}/>
             <AddHolder/>
             <Refrigerator/>
             <SountdItems/>

@@ -1,0 +1,79 @@
+.mainContainer{
+    display: flex;
+}
+.div1{
+    background-color: white;
+    padding: 1rem;
+    width: 13rem;
+    outline: 1px solid #ddd;
+    margin: 1rem;
+    border-radius: 0.3rem;
+}
+.div2{
+    margin: 1rem;
+    border-radius: 0.3rem;
+}
+.div2 p{
+    background-color: white;
+    padding: 1rem;
+    width: 13rem;
+    outline: 1px solid #ddd;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+}
+.div2 img{
+    margin-right: 1rem;
+}
+.section2{
+    border: 1px solid #ddd;
+    background-color: white;
+    width: 100%;
+    height: auto;
+    margin: 1rem;
+    padding: 2rem;
+    border-radius: 0.3rem;
+}
+.section2Heading{
+    font-size: 18px;
+    font-weight: 600;
+    color: #3d3d3d;
+    margin-bottom: 2rem;
+}
+.section2Heading span{
+    font-size: 14px;
+    font-weight: 400;
+}
+.section2 input{
+    padding: 0.7rem;
+    width: 15rem;
+    border-radius: 0.3rem;
+    border: 1px solid #ddd;
+}
+
+.section2 input[type='radio']{
+    padding: 0;
+    width: 2rem;
+    height: 1rem;
+}
+
+.inputDivs{
+    margin-right: 2rem;
+    margin-bottom: 2rem;
+}
+
+@media screen and (max-width:480px) {
+    .mainContainer{
+        flex-direction: column;
+    }
+    .div1{
+        width: 23rem;
+    }
+    .namesFirstAndLast{
+        display: flex;
+        flex-direction: column;
+    }
+    .section2{
+        width: 22rem;
+    }
+}

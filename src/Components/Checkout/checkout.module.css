@@ -198,9 +198,11 @@
     .itemContainer{
         width: 22rem;
         margin: 1rem 0rem;
+        height: auto;
     }
     .checkoutBox{
         margin: 1rem 0rem;
+        height: auto;
     }
     .cardItem{
         display: flex;

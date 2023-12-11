@@ -14,7 +14,7 @@ const ImageSlider = () => {
     // Function to automatically advance the slider
     const autoAdvance = setInterval(() => {
       setCurrentIndex((currentIndex + 1) % images.length);
-    }, 3000); // 2000 milliseconds (2 seconds)
+    }, 2000); // 2000 milliseconds (2 seconds)
 
     return () => {
       // Cleanup function to clear the interval when the component unmounts

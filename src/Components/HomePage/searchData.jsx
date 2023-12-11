@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import style from '../ProductsData/products.module.css'
 import { useNavigate } from "react-router-dom";
 import { AddItemWishList } from "../WishList/addItemToWishlist";
@@ -7,15 +7,8 @@ import { AddItemWishList } from "../WishList/addItemToWishlist";
 
 export const SearchData = ({searchVal,setProductID})=>{
     const [data,setData] = useState([]);
-    const [id,setId] = useState();
     const navigate = useNavigate();
-    const token = sessionStorage.getItem('authToken');
-    const body = {
-      "productId": `${id}`
-    }
-    // const {setProductID} = useContext(ItemValContext);
-    // const search = 'mobile'
-    // console.log(search);
+  
     const fetchProducts = async()=>{
         try {
             const products = await axios.get(
@@ -32,6 +25,7 @@ export const SearchData = ({searchVal,setProductID})=>{
     }
 
 
+
     const filterItems = data.filter((item)=>{
         const subcategory = item.subCategory?item.subCategory.toLowerCase():'';
         const branditem = item.brand?item.brand.toLowerCase():'';
@@ -45,37 +39,11 @@ export const SearchData = ({searchVal,setProductID})=>{
     },[])
 
     const handleId = (e)=>{
+      // console.log(e.currentTarget.id);
       setProductID(e.currentTarget.id)
       navigate('/productDetails');
     }
 
-
-
-  //   const addItemTowishlist = async(id)=>{
-  //     try {
-          
-  //         const responce = await axios.patch(
-  //             'https://academics.newtonschool.co/api/v1/ecommerce/wishlist',
-  //             {
-  //               "productId": `${id}`
-  //             } ,
-  //             {
-  //                 headers: {
-  //                 "Authorization" : `Bearer ${token}`,
-  //                  "projectID" : 'f2wxvt7cmknp'
-  //             }
-  //         }
-  //         )
-  //         console.log(responce.data.message);
-  //         alert(responce.data.message);
-  //     } catch (error) {
-  //         console.log(error);
-  //         alert('Already added in wishlist');
-  //     }
-  // }
-  // useState(()=>{
-  //   addItemTowishlist();
-  // },[id]);
 
     return(
         <main>

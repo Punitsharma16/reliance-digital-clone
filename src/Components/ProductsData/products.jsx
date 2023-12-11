@@ -2,7 +2,6 @@ import axios from "axios";
 import {useContext, useEffect, useState } from "react";
 import { SendValToProduct } from "../../App";
 import style from './products.module.css'
-import heart from '../svgs/heart.svg'
 import { useNavigate } from "react-router-dom";
 import { AddItemWishList } from "../WishList/addItemToWishlist";
 
@@ -10,13 +9,6 @@ export const Products = ()=>{
   const {itemVal,setProductID} = useContext(SendValToProduct);
   const navigate = useNavigate();
   const val = itemVal;
-  // console.log(val);
-  const [id, setId] = useState('');
-  const token = sessionStorage.getItem('authToken');
-  const body = {
-    "productId": `${id}`
-  }
-
   const [filterData,setFilterdata] = useState([]);
     
     const fetchData = async (val) => {
@@ -59,7 +51,7 @@ export const Products = ()=>{
                     <img className={style.productImage} src={data.displayImage} alt="" />
                     <div>
                     <p className={style.productName}>{data.name}</p><br />
-                    <p style={{color:'blue',fontWeight:'600'}}>&#x20B9; {data.price}</p><br />
+                    <p style={{color:'rgb(14, 24, 109)',fontWeight:'600'}}>&#x20B9; {data.price}</p><br />
                     <span className={style.offer}>OFFERS AVAILABLE</span>
                     </div>
                     </section>

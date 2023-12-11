@@ -1,7 +1,6 @@
 import { createContext, useState } from 'react';
 import './App.css';
 import { HomePage } from './Components/HomePage/home';
-import { AppNavbar } from './Components/Navbar/AppNavbar';
 import { Products } from './Components/ProductsData/products';
 import { Contact } from './Components/Contact/contact';
 import { FilteredData } from './Components/Navbar/filtersData';
@@ -14,8 +13,8 @@ import { Login } from './Components/login/login';
 import { WishList } from './Components/WishList/wishlist';
 import { CartItems } from './Components/Cart/cartItem';
 import { Checkout } from './Components/Checkout/checkout';
-import { ProfileModal } from './Components/Profile/profileModal';
 import { MyOrder } from './Components/Orders/myOrder/myorder';
+import { MyProfile } from './Components/My Profile/myProfile';
 
 export const ItemValContext = createContext();
 export const SendValToProduct = createContext();
@@ -24,19 +23,21 @@ export const SendValToFilter = createContext();
 export const SendValToSearchData = createContext();
 export const CartItemsData = createContext();
 export const SendCheckoutToMyOrders = createContext();
+
 function App() {
   const [itemVal,setItemVal] = useState('');
   const [navVal,setNavVal] = useState('');
-  const [search,setSearchVal] = useState('thev');
+  const [searchVal,setSearchVal] = useState('');
   const [productID,setProductID] = useState('');
   const [cartVal,setCartVal] = useState();
+  const [buyNow,setBuyNow] = useState(false);
   const [valFromCheckout,setValFromCheckout] = useState(false);
   console.log(navVal);
   console.log(itemVal);
-  console.log(search);
-  console.log(productID);
+  console.log(searchVal);
   console.log(cartVal);
   console.log(valFromCheckout);
+  console.log(productID);
   return (
     <div className="App">
       <Routes>
@@ -49,7 +50,7 @@ function App() {
         }>
         <Route path='/' element={
       <ItemValContext.Provider value={{setItemVal}}>
-          <HomePage search={search} setProductID={setProductID}/>
+          <HomePage setProductID={setProductID}/>
       </ItemValContext.Provider>
         }/>
         <Route path='/filterData' element={
@@ -64,22 +65,20 @@ function App() {
         }/>
         <Route path='/contact' element={<Contact/>}/>
         {/* <Route path='/searchItems' element={<SearchData searchVal={search} setProductID={setProductID} />}/> */}
-        <Route path='/productDetails' element={<ProductDetails setCartVal={setCartVal} productID={productID}/>}/>
+        <Route path='/productDetails' element={<ProductDetails setBuyNow={setBuyNow} setCartVal={setCartVal} productID={productID}/>}/>
         <Route path='/wishlist' element={<WishList productID={productID}/>}/>
+        <Route path='/myProfile' element={<MyProfile/>}/>
         <Route path='/cartItem' element={
           <CartItemsData.Provider value={{setCartVal}}>
               <CartItems/>
           </CartItemsData.Provider>
       }/>
+      <Route path='/searchItem' element={<SearchData setProductID={setProductID} searchVal={searchVal}/>}/>
       <Route path='/myOrders' element={
-        <SendCheckoutToMyOrders.Provider>
-             <MyOrder valFromCheckout={valFromCheckout}/>
-        </SendCheckoutToMyOrders.Provider>
+             <MyOrder buyNow={buyNow} valFromCheckout={valFromCheckout}/>
       }/>
         <Route path='/checkout' element={
-          <SendCheckoutToMyOrders.Provider>
-              <Checkout setValFromCheckout={setValFromCheckout} cartVal={cartVal}/>
-          </SendCheckoutToMyOrders.Provider>
+              <Checkout buyNow={buyNow} setValFromCheckout={setValFromCheckout} cartVal={cartVal}/>
         }/>
         </Route>
         {/* <Route path='/profile' element={<ProfileModal/>}/> */}

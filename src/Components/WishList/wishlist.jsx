@@ -10,27 +10,6 @@ export const WishList = ({productID})=>{
     const [id, setId] = useState();
     console.log(id);
     
-    
-    // const addzItemTowishlist = async(productID)=>{
-    //     try {
-            
-    //         const responce = await axios.patch(
-    //             'https://academics.newtonschool.co/api/v1/ecommerce/wishlist',
-    //              body ,
-    //             {
-    //                 headers: {
-    //                 "Authorization" : `Bearer ${token}`,
-    //                  "projectID" : 'f2wxvt7cmknp'
-    //             }
-    //         }
-    //         )
-    //         console.log(responce.data.message);
-    //         alert(responce.data.message);
-    //     } catch (error) {
-    //         console.log(error);
-    //         alert('Already added in wishlist');
-    //     }
-    // }
 
     const fetchItemFromWishlist = async()=>{
         try {
