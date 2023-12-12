@@ -5,16 +5,19 @@ import left from '../svgs/left.svg'
 import right from '../svgs/right.svg'
 import { useNavigate } from "react-router-dom";
 import { ValContextNavbar } from "../../App";
+import { Loader } from "../Loader/loader";
 
 export const Mobile = ()=>{
     const [mobileData,setMobileData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [isLoader,setIsLoader] = useState(true);
     const itemsPerPage = 5;
 
     const {setProductID} = useContext(ValContextNavbar);
     const navigate = useNavigate();
 
     const fetchData = async () => {
+        setIsLoader(true);
         try {
           const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?filter={"subCategory":"mobile"}&limit=100`, {
             headers: {
@@ -28,6 +31,8 @@ export const Mobile = ()=>{
         } catch (error) {
           // Handle any errors here
           console.error(error);
+        } finally{
+            setIsLoader(false);
         }
       };
 
@@ -60,7 +65,7 @@ const displayedData = mobileData.slice(startIndex, endIndex);
     return(
         <main style={{display:'flex',alignItems:'center',margin:'1rem 0rem',backgroundColor:'#fff',borderRadius:'0.5rem'}}>
             <button className={style.button} onClick={handleShowPrevious}><img src={left} alt="prev" /></button>
-            {
+            { isLoader ? <Loader/> :(
                 displayedData.map((item,i)=>{
                     return(
                         <main key={item._id} className={ i%2===0 ? `hide ${style.mainContainer}` : `${style.mainContainer}`}>
@@ -76,6 +81,7 @@ const displayedData = mobileData.slice(startIndex, endIndex);
                         </main>
                     )
                 })
+            )
             }
             <button className={style.button} onClick={handleLoadMore}><img src={right} alt="next" /></button>
         </main>

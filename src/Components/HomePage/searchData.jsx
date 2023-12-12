@@ -3,14 +3,17 @@ import { useEffect, useState } from "react";
 import style from '../ProductsData/products.module.css'
 import { useNavigate } from "react-router-dom";
 import { AddItemWishList } from "../WishList/addItemToWishlist";
+import { Loader } from "../Loader/loader";
 // import { SendValToSearchData } from "../../App";
 
 export const SearchData = ({searchVal,setProductID})=>{
     const [data,setData] = useState([]);
+    const [loader,setLoader] = useState(true);
     const navigate = useNavigate();
   
     const fetchProducts = async()=>{
         try {
+            setLoader(true);
             const products = await axios.get(
                 'https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?limit=700',
                 {
@@ -21,6 +24,8 @@ export const SearchData = ({searchVal,setProductID})=>{
             setData(products.data.data)
         } catch (error) {
             console.log(error);
+        } finally{
+          setLoader(false);
         }
     }
 
@@ -48,13 +53,13 @@ export const SearchData = ({searchVal,setProductID})=>{
     return(
         <main>
           <section className={style.products}>
-            {
+
+            { loader ? <Loader/> :(
               filterItems.map((data,i)=>{
                 return(
                   <main  className={style.ProductsContainer}  key={i}>
                     <section onClick={handleId} id={data._id} className={style.productInfo}>
-
-                    <img className={style.productImage} src={data.displayImage} alt="" />
+                      <img className={style.productImage} src={data.displayImage} alt="" />
                     <div>
                     <p className={style.productName}>{data.name}</p><br />
                     <p style={{color:'blue',fontWeight:'600'}}>&#x20B9; {data.price}</p><br />
@@ -69,6 +74,7 @@ export const SearchData = ({searchVal,setProductID})=>{
                   </main>
                 )
               })
+            )
             }
           </section>
         </main>

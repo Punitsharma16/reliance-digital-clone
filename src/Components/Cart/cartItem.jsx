@@ -4,6 +4,7 @@ import rating from '../svgs/rating.svg'
 import style from './cartItem.module.css'
 import { useNavigate } from "react-router-dom";
 import { CartItemsData } from "../../App";
+import { AddItemWishList } from "../WishList/addItemToWishlist";
 
 export const CartItems = ()=>{
     const {setCartVal} = useContext(CartItemsData);
@@ -100,7 +101,7 @@ export const CartItems = ()=>{
                                     <hr />
                                     <section className={style.cartItemButton}>
                                         <p id={product.product._id} onClick={(e)=>removeItemFromCart(e.currentTarget.id)}>Remove</p>
-                                        <p>Move to wishlist</p>
+                                        <p>{<AddItemWishList/>}</p>
                                     </section>
                                 </main>
                             )

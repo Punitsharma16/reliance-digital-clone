@@ -4,7 +4,7 @@ import login from '../svgs/login.svg'
 import style from './appNavbar.module.css'
 import { useContext, useEffect, useRef, useState } from "react"
 import { ValContextNavbar } from "../../App"
-import { SearchData } from "../HomePage/searchData"
+// import { SearchData } from "../HomePage/searchData"
 import { ProfileModal } from "../Profile/profileModal"
 
 export const AppNavbar = ()=>{
@@ -127,7 +127,7 @@ export const AppNavbar = ()=>{
                     <span className={style.navFilter} onClick={handleTravel}>TRAVEL</span>
                 </div>
             </section>
-            <SearchData/>
+            {/* <SearchData/> */}
             
         </main>
     )

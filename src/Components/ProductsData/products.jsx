@@ -4,15 +4,18 @@ import { SendValToProduct } from "../../App";
 import style from './products.module.css'
 import { useNavigate } from "react-router-dom";
 import { AddItemWishList } from "../WishList/addItemToWishlist";
+import { Loader } from "../Loader/loader";
 
 export const Products = ()=>{
   const {itemVal,setProductID} = useContext(SendValToProduct);
+  const [isLoader,setIsLoader] = useState(true)
   const navigate = useNavigate();
   const val = itemVal;
   const [filterData,setFilterdata] = useState([]);
     
     const fetchData = async (val) => {
   try {
+    setIsLoader(true);
     const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?filter={"subCategory":"${val}"}&limit=100`, {
       headers: {
         projectID: 'f2wxvt7cmknp',
@@ -27,6 +30,8 @@ export const Products = ()=>{
     // Handle any errors here
     console.error(error);
     console.log(val);
+  } finally{
+    setIsLoader(false);
   }
 };
 
@@ -42,7 +47,7 @@ export const Products = ()=>{
     return(
         <main>
           <section className={style.products}>
-            {
+            { isLoader ? <Loader/> :(
               filterData.map((data)=>{
                 return(
                   <main className={style.ProductsContainer} key={data._id}>
@@ -63,7 +68,9 @@ export const Products = ()=>{
                     
                  
                 )
-              })
+    
+              }
+              ))
             }
           </section>
         </main>

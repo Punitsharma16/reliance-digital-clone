@@ -179,6 +179,7 @@
         padding: 1rem;
         border-radius: 0.3rem;
         margin: 1rem 0rem;
+        height: auto;
     }
     .form input{
         padding: 0.4rem;
@@ -208,7 +209,7 @@
         display: flex;
         justify-content: space-between;
         margin-bottom: 1rem;
-        height: 11rem;
+        height: auto;
     
     }
     .cartItemHeading{
@@ -222,6 +223,7 @@
     }
     .cardItemBox1{
         width: 9.5rem;
+        height: auto;
     }
     
     .checkoutButton{

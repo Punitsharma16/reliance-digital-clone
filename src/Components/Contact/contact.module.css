@@ -51,4 +51,7 @@
         flex-direction: column;
         align-items: center;
     }
+    .cards{
+        margin: 0.5rem;
+    }
 }

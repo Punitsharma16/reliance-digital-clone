@@ -16,14 +16,15 @@ export const ProductDetails = ({productID,setOrderVal,setBuyNow})=>{
   const [productDetails,setProductDetails] = useState({});
   const token = sessionStorage.getItem("authToken")
   const navigate = useNavigate();
-  // const {setCartVal} = useContext(SendValToProduct)
   const [StartIndex,setStartIndex] = useState(0);
+  const [isLoader,setIsLoader] = useState(true);
   const prevImages = ()=>{
     setStartIndex(StartIndex - 3);
   }
  
     const fetchProductDetails = async (productID) => {
         try {
+          setIsLoader(true);
           const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/product/${productID}`, {
             headers: {
               projectID: 'f2wxvt7cmknp',
@@ -38,6 +39,8 @@ export const ProductDetails = ({productID,setOrderVal,setBuyNow})=>{
         } catch (error) {
           // Handle any errors here
           console.error(error);
+        } finally{
+          setIsLoader(false);
         }
       };
 
@@ -109,7 +112,7 @@ export const ProductDetails = ({productID,setOrderVal,setBuyNow})=>{
           </aside>
 
           <aside>
-            <div>
+            <div className={style.nameRating}>
             <p style={{margin:'1rem 0rem',fontWeight:'600', fontSize:'19px'}}>{name}</p>
             <span> <img src={rating} alt="rating" /> <img src={rating} alt="rating" /> <img src={rating} alt="rating" /> ({ratings} Rating & Reviews)</span>
             <span style={{margin:'2rem'}}><img src={share} alt="share" /> Share</span> <span className="hide"><img src={print} alt="" /> Print</span>
@@ -234,5 +237,6 @@ export const ProductDetails = ({productID,setOrderVal,setBuyNow})=>{
           </div>
         </main>
       </>
+      
     )
 }

@@ -7,6 +7,9 @@ body{
     background-color: #f1f1f1;
     /* background-color: rgb(255, 241, 241); */
 }
+.image-slider img{
+    width: 100%;
+}
 
 @media screen and (max-width: 480px){
     .hide{

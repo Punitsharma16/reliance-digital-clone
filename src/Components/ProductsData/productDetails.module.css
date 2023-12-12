@@ -54,8 +54,8 @@
     width: 8rem;
 }
 .images img:hover{
-    width: 12.5rem;
-    height: 12.5rem;
+    width: 12rem;
+    height: 12rem;
     z-index: 2;
     transform: scale(1.05);
     transition: transform 0.25s ease-in-out;
@@ -111,6 +111,9 @@
     }
     .returnPolicy{
         width: 21rem;
+        margin-left: 1rem;
+    }
+    .nameRating{
         margin-left: 1rem;
     }
 }

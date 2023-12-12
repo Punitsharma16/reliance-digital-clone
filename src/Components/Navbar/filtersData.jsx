@@ -4,16 +4,18 @@ import { SendValToFilter } from "../../App";
 import style from '../ProductsData/products.module.css'
 import { useNavigate } from "react-router-dom";
 import { AddItemWishList } from "../WishList/addItemToWishlist";
+import { Loader } from "../Loader/loader";
 
 export const FilteredData = ()=>{
     const [yourData,setYourData] = useState([]);
     const {navVal,setProductID} = useContext(SendValToFilter);
-    const [id,setId] = useState();
+    const [isLoader,setIsLoader] = useState(true);
     const navigate = useNavigate();
     
     const val = navVal;
     console.log(val);
     const fetchData = async (val) => {
+      setIsLoader(true)
         try {
           const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?filter={"subCategory":"${val}"}&limit=100`, {
             headers: {
@@ -28,6 +30,8 @@ export const FilteredData = ()=>{
           // Handle any errors here
           console.error(error);
           console.log(val);
+        } finally{
+          setIsLoader(false);
         }
       };
 
@@ -43,7 +47,7 @@ export const FilteredData = ()=>{
     return(
       <main>
       <section className={style.products}>
-        {
+        { isLoader ? <Loader/> : (
           yourData.map((data,i)=>{
             return(
               <main className={style.ProductsContainer}  key={i}>
@@ -59,6 +63,7 @@ export const FilteredData = ()=>{
               </main>
             )
           })
+        )
         }
       </section>
     </main>
