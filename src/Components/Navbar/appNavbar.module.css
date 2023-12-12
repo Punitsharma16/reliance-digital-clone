@@ -42,7 +42,7 @@
     cursor: pointer;
 }
 .navFilter:hover{
-    color: aqua;
+    color: #9c9999;
 }
 .authModal{
     padding: 0.5rem;
