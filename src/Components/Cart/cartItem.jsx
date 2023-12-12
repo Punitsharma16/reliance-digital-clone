@@ -101,7 +101,7 @@ export const CartItems = ()=>{
                                     <hr />
                                     <section className={style.cartItemButton}>
                                         <p id={product.product._id} onClick={(e)=>removeItemFromCart(e.currentTarget.id)}>Remove</p>
-                                        <p>{<AddItemWishList/>}</p>
+                                        <p><AddItemWishList id={product.product._id}/></p>
                                     </section>
                                 </main>
                             )

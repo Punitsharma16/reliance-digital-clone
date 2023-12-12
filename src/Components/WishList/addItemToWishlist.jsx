@@ -3,11 +3,13 @@ import heart from '../svgs/heart.svg'
 import style from './wishlist.module.css'
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import { Login } from '../login/login';
 
 export const AddItemWishList = ({id})=>{
     const token = sessionStorage.getItem('authToken');
     const [showLogin,setShowLogin] = useState(false);
     const navigate = useNavigate();
+    console.log(id);
     const addItemTowishlist = async(id)=>{
         if(token || showLogin){
         try {
@@ -39,6 +41,7 @@ export const AddItemWishList = ({id})=>{
             <div id={id} onClick={(e)=>addItemTowishlist(e.currentTarget.id)} className={style.wishlistClick}>
                 <span><img src={heart} alt="heart" />Add to Wishlist</span>
             </div>
+            {showLogin && <Login setShowLogin={setShowLogin}/>}
         </main>
     )
 }

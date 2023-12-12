@@ -171,6 +171,11 @@
   filter: invert(1);
 }
 
+.form input[type="number"]::-webkit-outer-spin-button,
+.form input[type="number"]::-webkit-inner-spin-button {
+    display: none;
+  }
+
 @media screen and (max-width:480px) {
     .checkoutBox{
         width: 90%;

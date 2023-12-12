@@ -9,7 +9,6 @@ export const WishList = ({productID})=>{
     const [wishlistData,setWishlistData] = useState([]);
     const [id, setId] = useState();
     console.log(id);
-    
 
     const fetchItemFromWishlist = async()=>{
         try {
@@ -35,6 +34,7 @@ export const WishList = ({productID})=>{
     useEffect(()=>{
         fetchItemFromWishlist()
     },[])
+    console.log(wishlistData);
 
     const deleteItemFromWIshlist = async ()=>{
         try {

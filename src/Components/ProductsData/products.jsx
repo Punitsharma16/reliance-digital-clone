@@ -43,6 +43,7 @@ export const Products = ()=>{
       setProductID(e.currentTarget.id)
       navigate('/productDetails');
     }
+    console.log(filterData);
 
     return(
         <main>

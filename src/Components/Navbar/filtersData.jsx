@@ -59,7 +59,9 @@ export const FilteredData = ()=>{
                 <span className={style.offer}>OFFERS AVAILABLE</span>
                 </div>
                 </section>
+                <div>
                 <AddItemWishList id={data._id}/>
+                </div>
               </main>
             )
           })
