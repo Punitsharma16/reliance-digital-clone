@@ -10,15 +10,18 @@ export const MyProfile = ()=>{
     const [userDetails,setUserDetails] = useState({});
     const [name,setName] = useState('');
     const navigate = useNavigate();
+
     useEffect(()=>{
         const user = sessionStorage.getItem('userInfo');
         const userData = JSON.parse(user);
         setName(userData.name)
         setUserDetails(userData);
     },[])
+
     console.log(userDetails);
     const beforeSpace = name.split(' ')[0];
     const afterSpace = name.split(' ').slice(1).join(' ')
+    
     return(
         <main className={style.mainContainer}>
             <section>

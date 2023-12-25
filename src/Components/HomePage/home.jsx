@@ -1,36 +1,24 @@
 import { AddHolder } from "./AddHome/addHolder"
-import { Images } from "./imageBar";
-import { Laptop } from "../items/laptops";
-import { Mobile } from "../items/mobile";
-import { Refrigerator } from "../items/Refrigerators";
-import { SountdItems } from "../items/soundItems";
+import { Images } from "./imageBar/imageBar";
+import { ItemsRaw} from "../items/rawItems";
 import { ImagesData } from "../items/images/otherImages";
-import { Kitchenappliances } from "../items/kitchenAppliances";
-import { Tablet } from "../items/tablet";
 import { MixItems } from "../items/MixItems/mixImages";
 
-export const HomePage = ({search})=>{
-    // console.log(search);
-    // const [state,setState] = useState(true);
-    // if(search === 'val' || search === ''){
-    //     setState(true);
-    // }else{
-    //     setState(false);
-    // }
+export const HomePage = ()=>{
+    
     return(
         <main>
-            {/* <ImageSlider/> */}
             <div className="hide">
             <Images/>
             </div>
-            <Mobile/>
-            <Laptop/>
+            <ItemsRaw value={'mobile'}/>
+            <ItemsRaw value={'laptop'}/>
             <AddHolder/>
-            <Refrigerator/>
-            <SountdItems/>
+            <ItemsRaw value={'refrigerator'}/>
+            <ItemsRaw value={'audio'}/>
             <ImagesData/>
-            <Kitchenappliances/>
-            <Tablet/>
+            <ItemsRaw value={'kitchenappliances'}/>
+            <ItemsRaw value={'tablet'}/>
             <MixItems/>
         </main>
     )

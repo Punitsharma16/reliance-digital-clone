@@ -1,4 +1,7 @@
 .mainContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     margin: 1rem 0rem;
     background-color: #fff;
 }
@@ -6,10 +9,7 @@
     margin: 1rem;
     cursor: pointer;
 }
-.imagesDiv{
-    display: flex;
-    justify-content: space-around;
-}
+
 
 @media screen and (max-width:480px) {
     .mainContainer img{

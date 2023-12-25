@@ -1,15 +1,19 @@
 .mainContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
     background-color: white;
     padding: 1rem;
 }
-.addContiner{
+.addContainer{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
 }
 .addImage{
-    height: 13rem;
-    width: 13rem;
+    height: 14rem;
+    width: 14rem;
     cursor: pointer;
 }
 .addItemDiv{
@@ -17,15 +21,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 1rem;
+    margin: 1rem 5rem;
 }
-/* .imageDiv{
-    padding: 0;
-    height: 14rem;
-    width: 14rem;
-    border-radius: 50%;
-    border: 6px solid red;
-} */
+
 .addItemDiv p{
     color: black;
     font-weight: 600;
@@ -58,7 +56,7 @@
         justify-content: center;
         margin: 0.3rem;
     }
-    .addContiner{
+    .addContainer{
         flex-wrap: nowrap;
     }
     

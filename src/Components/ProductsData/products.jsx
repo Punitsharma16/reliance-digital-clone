@@ -61,9 +61,6 @@ export const Products = ()=>{
                     <span className={style.offer}>OFFERS AVAILABLE</span>
                     </div>
                     </section>
-                    {/* <div id={data._id} onClick={(e)=>addItemTowishlist(e.currentTarget.id)} className={style.wishList}>
-                      <span><img src={heart} alt="heart" />Add to Wishlist</span>
-                    </div> */}
                     <AddItemWishList id={data._id}/>
                   </main>
                     

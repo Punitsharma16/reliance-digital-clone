@@ -1,15 +1,13 @@
 import { Outlet } from "react-router-dom"
 import { AppNavbar } from "./AppNavbar"
 import { Footer } from "../Footer/footer"
-import ImageSlider from "../HomePage/imageSlider"
-// import { SearchData } from "../HomePage/searchData"
+import ImageSlider from "../HomePage/autoImageChange/imageSlider"
 
-export const NavbarOutlet = ({search,setProductID})=>{
+export const NavbarOutlet = ()=>{
     return(
         <main>
             <AppNavbar/>
             <ImageSlider/>
-            {/* <SearchData searchVal={search} setProductID={setProductID}/> */}
             <Outlet/>
             <Footer/>
         </main>

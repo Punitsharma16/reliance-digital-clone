@@ -2,7 +2,9 @@ import {useEffect, useState } from 'react'
 import style from './checkout.module.css'
 import rating from '../svgs/rating.svg'
 import { Payment } from '../Orders/PayementModal/paymentModel';
-import axios from 'axios';
+import { PaymentBox } from './paymentForm';
+import { ShippingAddressForm } from './shippingAddress/form';
+import { Address } from './shippingAddress/addressFromForm';
 export const Checkout = ({setValFromCheckout,buyNow})=>{
     const [addressModal,setAddressModal] = useState(false);
     const [showAddress,setShowAddress] = useState(false);
@@ -24,16 +26,7 @@ export const Checkout = ({setValFromCheckout,buyNow})=>{
         state:'',
         phone:''
     });
-    const handleAddress = (e)=>{
-        const{name,value} = e.target;
-        setAddress({...address,[name]:value})
-    }
-    console.log(address);
-    const submitform = ()=>{
-        setAddressModal(false);
-        setShowAddress(true);
-    }
-
+    
     useEffect(()=>{
         const data = sessionStorage.getItem('cartItems');
         const parseData = JSON.parse(data);
@@ -41,30 +34,6 @@ export const Checkout = ({setValFromCheckout,buyNow})=>{
     },[]);
     
     console.log(cartData);
-
-
-    const clearCart = async ()=>{
-        try {
-            const responce = await axios.delete('https://academics.newtonschool.co/api/v1/ecommerce/cart',
-            {
-                headers: {
-                "Authorization" : `Bearer ${token}`,
-                 "projectID" : 'f2wxvt7cmknp'
-            }
-        })
-        console.log(responce);
-        } catch (error) {
-            console.log(error);
-        }
-
-    }
-
-    const handlePaymentForm = (e)=>{
-        e.preventDefault();
-        setValFromCheckout(true);
-        setPaymentModel(true);
-        // clearCart();
-    }
 
     return(
         <main>
@@ -74,25 +43,9 @@ export const Checkout = ({setValFromCheckout,buyNow})=>{
                         <p style={{fontWeight:'600',fontSize:'14px'}}>SHIPPING ADDRESS</p>
                     </div>
                     { showAddress &&
-                        <main className={style.addressContainer}>
-                            <p style={{fontSize:'15px',fontWeight:'600',marginBottom:'0.4rem'}}>{address.firstname} {address.lastname}</p>
-                            <span>{address.address}</span>
-                            <span>, {address.colony}</span>
-                            <span>, {address.landmark}</span>
-                            <br />
-                            <span>{address.city} - </span>
-                            <span>{address.pincode} </span>
-                            <span> ,{address.state}</span>
-                            <br />
-                            <br />
-                            <span style={{fontWeight:'600'}}>Mobile : </span>
-                            <span>{address.phone}</span>
-                            <div className={style.addressButton}>
-                                <button onClick={()=>setAddressModal(true)} style={{backgroundColor:'red'}}>Change</button>
-                                <button onClick={()=>setShowOrder(true)}>Delivery Here</button>
-                            </div>
-                            </main>
-                    }
+                        <Address setAddressModal={setAddressModal} setShowOrder={setShowOrder} address={address}/>
+                        }
+                    
                 </section>
                 <section className={style.checkoutBox}>
                     <div style={{cursor:'pointer'}}>
@@ -170,71 +123,14 @@ export const Checkout = ({setValFromCheckout,buyNow})=>{
                 }
             </section>
 
-
-
-            <section className={style.checkoutBox}>
-                    <div style={{cursor:'pointer'}}>
-                        <p style={{fontWeight:'600',fontSize:'14px'}}>PAY SECURELY</p>
-                    </div>
-                    { showPayment &&
-                        <main style={{border:'1px solid #ddd',marginTop:'2rem',backgroundColor:'#fff',padding:'1rem'}}>
-                    <div style={{display:'flex',alignItems:'center',}}>
-                    <span style={{margin:'2rem 1rem 1rem 1rem',color:'darkblue',fontSize:'17px',fontWeight:'600'}}>Payment Option</span>
-                    <img src="https://www.reliancedigital.in/build/client/images/payment_logos_cc.gif" alt="" />
-                    </div>
-                    
-                    <hr />
-                     <form onSubmit={handlePaymentForm}  className={style.paymentBox}>
-                          <section>
-                               {/* <input type="number" name="debitCardNo" id="debitCardNo" pattern='\d{4}' maxlength='16' placeholder='Enter Card Number' required/> */}
-                               <input type="number" inputmode="numeric" pattern="[0-4\s]{1,5}" maxlength="16" placeholder="xxxx xxxx xxxx xxxx" required /><br />
-                               <input type="text" name="nameOnCard" id="nameOnCard" placeholder='Enter Name on Card'required/> <br />
-                              <label style={{marginLeft:'0.7rem'}} htmlFor="date">Expire Date</label>
-                               <br />
-                              <input style={{width:'8rem'}} type="month" name="month" id="month" min="2019-01" max="2028-12" required/>
-                              {/* <input style={{width:'5rem'}} type="month" name="year" id="year" min="2019-01" max="2028-12" required/> */}
-                              <input style={{width:'5rem'}} type="number" name="cvv" id="cvv" maxLength="3"  placeholder='CVV' required/>
-                          </section>
-                            <p style={{fontSize:'12px',marginLeft:'0.7rem'}}>*Clicking on “Pay” will take you to a secure payment gateway where you can make your payment.
-                                 Your order will not be completed without this action</p>
-                            <input style={{width:'1rem'}} type="checkbox" name="check" id="check" required />
-                            <label style={{fontSize:'14px'}} htmlFor="check">I agree to the Term & Conditions</label><br />
-                            {/* <button onClick={()=>setPaymentModel(true)} className={style.paymentComplete}>PAY RS. {cartData.totalPrice}</button> */}
-                            <input type="submit" value={`PAY AMOUNT`} className={style.paymentComplete} />
-                     </form>
-                     </main>
-                     }
-            </section>
+            <PaymentBox setPaymentModel={setPaymentModel} setValFromCheckout={setValFromCheckout} showPayment={showPayment}/>
+            
             </aside>
 
-
-         { addressModal &&
-            <main className={style.modal}>
-            <aside className={style.addressBox}>
-                <div className={style.addressHeading}>
-                    <p>Enter new address</p>
-                    <p onClick={()=>setAddressModal(false)} style={{cursor:'pointer'}}>x</p>
-                </div>
-                <form onSubmit={submitform} className={style.form}>
-                    <input style={{width:'19rem'}} type="number" name="pincode" value={address.pincode} id="pincode" placeholder='Enter Pincode*' onInput={handleAddress} required/>
-                    <br />
-                    <input style={{width:'19rem'}} type="text" name="firstname" id="firstname" value={address.firstname} placeholder='Enter First Name*' onInput={handleAddress} required/>
-                    <input style={{width:'19rem'}} type="text" name="lastname" id="lastname" value={address.lastname} placeholder='Enter Last Name*' onInput={handleAddress} required/>
-                    <br />
-                    <input type="text" name="address" id="address" value={address.address} placeholder='Enter Flat / Houes No. / Floor*' onInput={handleAddress} required/>
-                    <br />
-                    <input type="text" name="colony" id="colony" value={address.colony} placeholder='Enter Colony / Street*' onInput={handleAddress} required/>
-                    <br />
-                    <input type="text" name="landmark" id="landmark" value={address.landmark} placeholder='Enter landmark' onInput={handleAddress}/>
-                    <br />
-                    <input type="text" style={{width:'19rem'}} name="city" id="city" value={address.city}  placeholder='Enter City' onInput={handleAddress}/>
-                    <input type="text" style={{width:'19rem'}} name="state" id="state" value={address.state} placeholder='Enter State' onInput={handleAddress}/>
-                    <input type="number" name="phone" id="phone" placeholder='Enter Mobile Number*' value={address.phone} onInput={handleAddress} required/>
-                    <input style={{width:'10rem'}} className={style.submitButton} type="submit" value="Submit" />
-                </form>
-            </aside>
-         </main>
-         }
+            { addressModal &&
+                <ShippingAddressForm setShowAddress={setShowAddress} setAddressModal={setAddressModal} address={address} setAddress={setAddress}/>
+                }
+    
          {paymentModel && <Payment/>}
         </main>
     )

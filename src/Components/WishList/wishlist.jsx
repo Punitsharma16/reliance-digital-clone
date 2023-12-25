@@ -27,9 +27,6 @@ export const WishList = ({productID})=>{
             console.log(error);
         }
     }
-    // useEffect(()=>{
-    //     addzItemTowishlist(productID);
-    // },[productID])
 
     useEffect(()=>{
         fetchItemFromWishlist()

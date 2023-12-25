@@ -1,7 +1,7 @@
 import { useState } from "react";
 import style from './imageBar.module.css'
-import left from '../svgs/left.svg'
-import right from '../svgs/right.svg'
+import left from '../../svgs/left.svg'
+import right from '../../svgs/right.svg'
 
 export const Images = () => {
 

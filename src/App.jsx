@@ -3,7 +3,6 @@ import './App.css';
 import { HomePage } from './Components/HomePage/home';
 import { Products } from './Components/ProductsData/products';
 import { Contact } from './Components/Contact/contact';
-import { FilteredData } from './Components/Navbar/filtersData';
 import { Route, Routes } from 'react-router-dom';
 import { NavbarOutlet } from './Components/Navbar/outlet';
 import { SearchData } from './Components/HomePage/searchData';
@@ -32,6 +31,7 @@ function App() {
   const [cartVal,setCartVal] = useState();
   const [buyNow,setBuyNow] = useState(false);
   const [valFromCheckout,setValFromCheckout] = useState(false);
+  const token = sessionStorage.getItem('authToken')
   console.log(navVal);
   console.log(itemVal);
   console.log(searchVal);
@@ -42,7 +42,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path='/login' element={<Login/>}/>
-        <Route path='/signup' element={<SignUp/>}/>
+        <Route path='/signup' element={token ? <SignUp/>:<NavbarOutlet/>}/>
         <Route path='/' element={
       <ValContextNavbar.Provider value={{setNavVal,setSearchVal,setProductID,setItemVal}}>
           <NavbarOutlet/>
@@ -53,11 +53,6 @@ function App() {
           <HomePage setProductID={setProductID}/>
       </ItemValContext.Provider>
         }/>
-        <Route path='/filterData' element={
-      <SendValToFilter.Provider value={{navVal,setProductID}}>
-         <FilteredData/> 
-      </SendValToFilter.Provider>
-        }/>
         <Route path='/products' element={
       <SendValToProduct.Provider value={{itemVal,setProductID}}>
           <Products/>
@@ -66,19 +61,23 @@ function App() {
         <Route path='/contact' element={<Contact/>}/>
         {/* <Route path='/searchItems' element={<SearchData searchVal={search} setProductID={setProductID} />}/> */}
         <Route path='/productDetails' element={<ProductDetails setBuyNow={setBuyNow} setCartVal={setCartVal} productID={productID}/>}/>
-        <Route path='/wishlist' element={<WishList productID={productID}/>}/>
-        <Route path='/myProfile' element={<MyProfile/>}/>
-        <Route path='/cartItem' element={
+        <Route path='/wishlist' element={token ? <WishList productID={productID}/> : <Login/>}/>
+        <Route path='/myProfile' element={token ? <MyProfile/>:<Login/>}/>
+        <Route path='/cartItem' element={token ? 
           <CartItemsData.Provider value={{setCartVal}}>
               <CartItems/>
           </CartItemsData.Provider>
+          :
+          <Login/>
       }/>
       <Route path='/searchItem' element={<SearchData setProductID={setProductID} searchVal={searchVal}/>}/>
       <Route path='/myOrders' element={
              <MyOrder buyNow={buyNow} valFromCheckout={valFromCheckout}/>
       }/>
-        <Route path='/checkout' element={
+        <Route path='/checkout' element={token ?
               <Checkout buyNow={buyNow} setValFromCheckout={setValFromCheckout} cartVal={cartVal}/>
+              :
+              <Login/>
         }/>
         </Route>
         {/* <Route path='/profile' element={<ProfileModal/>}/> */}

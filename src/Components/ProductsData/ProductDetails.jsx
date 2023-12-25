@@ -10,7 +10,6 @@ import star from '../svgs/star.svg'
 import { useNavigate } from "react-router-dom";
 import right from '../svgs/right.svg'
 import left from '../svgs/left.svg'
-// import { SendValToProduct } from "../../App";
 
 export const ProductDetails = ({productID,setOrderVal,setBuyNow})=>{
   const [productDetails,setProductDetails] = useState({});

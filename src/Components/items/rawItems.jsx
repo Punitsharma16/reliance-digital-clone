@@ -1,21 +1,25 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import style from './laptop.module.css'
+import style from './rawItems.module.css'
 import left from '../svgs/left.svg'
 import right from '../svgs/right.svg'
-import {ValContextNavbar } from "../../App";
 import { useNavigate } from "react-router-dom";
+import { ValContextNavbar } from "../../App";
+import { Loader } from "../Loader/loader";
 
-export const Tablet = ()=>{
-    const [tabletData,setTabletData] = useState([]);
+export const ItemsRaw = ({value})=>{
+    const [mobileData,setMobileData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const {setProductID} = useContext(ValContextNavbar);
-    const navigate = useNavigate();
+    const [isLoader,setIsLoader] = useState(true);
     const itemsPerPage = 5;
 
+    const {setProductID} = useContext(ValContextNavbar);
+    const navigate = useNavigate();
+
     const fetchData = async () => {
+        setIsLoader(true);
         try {
-          const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?filter={"subCategory":"tablet"}&limit=100`, {
+          const response = await axios.get(`https://academics.newtonschool.co/api/v1/ecommerce/electronics/products?filter={"subCategory":"${value}"}&limit=100`, {
             headers: {
               projectID: 'f2wxvt7cmknp',
             },
@@ -23,10 +27,12 @@ export const Tablet = ()=>{
       
           // Handle the response data here
           console.log(response.data.data);
-          setTabletData(response.data.data);
+          setMobileData(response.data.data);
         } catch (error) {
           // Handle any errors here
           console.error(error);
+        } finally{
+            setIsLoader(false);
         }
       };
 
@@ -47,22 +53,19 @@ export const Tablet = ()=>{
 // console.log(tvData);
 const startIndex = (currentPage - 1) * itemsPerPage;
 const endIndex = startIndex + itemsPerPage;
-const displayedData = tabletData.slice(startIndex, endIndex);
-console.log(displayedData);
+const displayedData = mobileData.slice(startIndex, endIndex);
+// console.log(displayedData);
 
-
-  const handleFilter = (e)=>{
+   const handleFilter = (e)=>{
     setProductID(e.currentTarget.id)
     navigate('/productDetails');
-  }
-
-
+   }
 
 
     return(
         <main style={{display:'flex',alignItems:'center',margin:'1rem 0rem',backgroundColor:'#fff',borderRadius:'0.5rem'}}>
             <button className={style.button} onClick={handleShowPrevious}><img src={left} alt="prev" /></button>
-            {
+            { isLoader ? <Loader/> :(
                 displayedData.map((item,i)=>{
                     return(
                         <main key={item._id} className={ i%2===0 ? `hide ${style.mainContainer}` : `${style.mainContainer}`}>
@@ -78,6 +81,7 @@ console.log(displayedData);
                         </main>
                     )
                 })
+            )
             }
             <button className={style.button} onClick={handleLoadMore}><img src={right} alt="next" /></button>
         </main>

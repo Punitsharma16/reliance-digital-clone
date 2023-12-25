@@ -4,7 +4,6 @@ import style from '../ProductsData/products.module.css'
 import { useNavigate } from "react-router-dom";
 import { AddItemWishList } from "../WishList/addItemToWishlist";
 import { Loader } from "../Loader/loader";
-// import { SendValToSearchData } from "../../App";
 
 export const SearchData = ({searchVal,setProductID})=>{
     const [data,setData] = useState([]);
@@ -44,7 +43,6 @@ export const SearchData = ({searchVal,setProductID})=>{
     },[])
 
     const handleId = (e)=>{
-      // console.log(e.currentTarget.id);
       setProductID(e.currentTarget.id)
       navigate('/productDetails');
     }
@@ -53,29 +51,23 @@ export const SearchData = ({searchVal,setProductID})=>{
     return(
         <main>
           <section className={style.products}>
-
             { loader ? <Loader/> :(
               filterItems.map((data,i)=>{
                 return(
                   <main  className={style.ProductsContainer}  key={i}>
-                    <section onClick={handleId} id={data._id} className={style.productInfo}>
-                      <img className={style.productImage} src={data.displayImage} alt="" />
-                    <div>
-                    <p className={style.productName}>{data.name}</p><br />
-                    <p style={{color:'blue',fontWeight:'600'}}>&#x20B9; {data.price}</p><br />
-                    <span className={style.offer}>OFFERS AVAILABLE</span>
-                    </div>
-                    </section>
-
-                    {/* <div onClick={(e)=>addItemTowishlist(e.currentTarget.id)} id={data._id} className={style.wishList}>
-                      <span><img src={heart} alt="" />Add to Wishlist</span>
-                    </div> */}
-                    <AddItemWishList id={data._id}/>
+                      <section onClick={handleId} id={data._id} className={style.productInfo}>
+                            <img className={style.productImage} src={data.displayImage} alt="" />
+                            <div>
+                                 <p className={style.productName}>{data.name}</p><br />
+                                 <p style={{color:'blue',fontWeight:'600'}}>&#x20B9; {data.price}</p><br />
+                                 <span className={style.offer}>OFFERS AVAILABLE</span>
+                            </div>
+                      </section>
+                      <AddItemWishList id={data._id}/>
                   </main>
                 )
               })
-            )
-            }
+            )}
           </section>
         </main>
     )

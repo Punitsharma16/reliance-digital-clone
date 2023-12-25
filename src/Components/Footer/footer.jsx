@@ -7,7 +7,7 @@ import style from './footer.module.css'
 import { useContext, useEffect, useState } from 'react'
 export const Footer = ()=>{
     const [showModel, setShowModel] = useState(false);
-    const {setNavVal} = useContext(ValContextNavbar);
+    const {setNavVal,setItemVal} = useContext(ValContextNavbar);
     const navigate = useNavigate();
 
     useEffect(()=>{
@@ -18,26 +18,12 @@ export const Footer = ()=>{
         }
       })
 
-      const handleMobile = ()=>{
-        setNavVal('mobile');
-        navigate('/filterData')
+      const handleItems = (e)=>{
+        console.log(e.currentTarget.id);
+        setItemVal(e.currentTarget.id);
+        navigate('/products');
       }
-      const handleLaptop = ()=>{
-        setNavVal('laptop');
-        navigate('/filterData')
-      }
-      const handleTv = ()=>{
-        setNavVal('tv');
-        navigate('/filterData')
-      }
-      const handleRefrigerator = ()=>{
-        setNavVal('refrigerator');
-        navigate('/filterData')
-      }
-      const handleKitchen = ()=>{
-        setNavVal('kitchenappliances');
-        navigate('/filterData')
-      }
+      
 
     return(
         <>
@@ -45,11 +31,11 @@ export const Footer = ()=>{
             <section className={style.section1}>
                 <div className={style.divSection1}>
                     <h4>PRODUCT CATEGORIES</h4>
-                    <p onClick={handleMobile}>Smartphones</p>
-                    <p onClick={handleLaptop}>Laptops</p>
-                    <p onClick={handleTv}>Televsions</p>
-                    <p onClick={handleRefrigerator}>Refrigerators</p>
-                    <p onClick={handleKitchen}>Kitchen Appliances</p>
+                    <p id='mobile' onClick={handleItems}>Smartphones</p>
+                    <p id='laptop' onClick={handleItems}>Laptops</p>
+                    <p id='tv' onClick={handleItems}>Televsions</p>
+                    <p id='refrigerator' onClick={handleItems}>Refrigerators</p>
+                    <p id='kitchenappliances' onClick={handleItems}>Kitchen Appliances</p>
                 </div>
                 <div className={`hide ${style.divSection1}`}>
                     <h4>SITE INFO</h4>

@@ -7,17 +7,14 @@ const ImageSlider = () => {
       "https://www.reliancedigital.in/medias/OnePlus-Banner-Nord-CE-2-Lite-5G-Banner-1365X260-.jpg?context=bWFzdGVyfGltYWdlc3wzMDM5NTF8aW1hZ2UvanBlZ3xpbWFnZXMvaDc5L2hlNi8xMDA3MjU3NDM5NDM5OC5qcGd8NWVhMDY2MTMxZTU0YjI1NGUxNzNkNjdjNTU0MzY3OWE4MjBiYmVhNjczMDhkODcyNzdiYjYxMTc1NTJkMzNkNg",
       "https://www.reliancedigital.in/medias/TCL-Smart-TV-Banner-D-1-.jpg?context=bWFzdGVyfGltYWdlc3wxMjQzNzN8aW1hZ2UvanBlZ3xpbWFnZXMvaGZmL2g0YS8xMDA2MzYyNjYwMDQ3OC5qcGd8NDBhMmEyMTE4YmNhYzBiZjgyOTdjNTA0NjcxNWE1M2ZhMGYzNjMwZjNjYzRhZGYzMWFkZWVkNWNlMmUwNGM1Ng",
       "https://www.reliancedigital.in/medias/Stylish-laptop-for-a-Stylish-You-1365X260-.jpg?context=bWFzdGVyfGltYWdlc3wyOTA0ODF8aW1hZ2UvanBlZ3xpbWFnZXMvaDM4L2gyOS8xMDA2MDkwNzc3Mzk4Mi5qcGd8ZjAwNzI0MGEzNTQxYjcxMDE0YzQxM2FlZjJjMTY0MGExZGE4NGJjNWE1NDU5OTFhMTk2OTcyZTAyZjg5NGM1OQ"
-    // Add more image URLs here
   ];
 
   useEffect(() => {
-    // Function to automatically advance the slider
     const autoAdvance = setInterval(() => {
       setCurrentIndex((currentIndex + 1) % images.length);
-    }, 2000); // 2000 milliseconds (2 seconds)
+    }, 2000);
 
     return () => {
-      // Cleanup function to clear the interval when the component unmounts
       clearInterval(autoAdvance);
     };
   }, [currentIndex]);
