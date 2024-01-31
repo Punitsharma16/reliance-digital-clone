@@ -8,19 +8,16 @@ import tag from '../svgs/tag.svg'
 import calender from '../svgs/calender.svg'
 import star from '../svgs/star.svg'
 import { useNavigate } from "react-router-dom";
-import right from '../svgs/right.svg'
-import left from '../svgs/left.svg'
+import { ProductDetailsImages } from "./productDetails/imagesBox";
 
 export const ProductDetails = ({productID,setOrderVal,setBuyNow})=>{
   const [productDetails,setProductDetails] = useState({});
   const token = sessionStorage.getItem("authToken")
   const navigate = useNavigate();
-  const [StartIndex,setStartIndex] = useState(0);
   const [isLoader,setIsLoader] = useState(true);
-  const prevImages = ()=>{
-    setStartIndex(StartIndex - 3);
-  }
- 
+  // const prevImages = ()=>{
+  //   setStartIndex(StartIndex - 3);
+  // }
     const fetchProductDetails = async (productID) => {
         try {
           setIsLoader(true);
@@ -29,14 +26,12 @@ export const ProductDetails = ({productID,setOrderVal,setBuyNow})=>{
               projectID: 'f2wxvt7cmknp',
             },
           });
-      
           // Handle the response data here
           console.log(response.data.data);
           sessionStorage.setItem('cartItems',JSON.stringify(response.data.data));
           setProductDetails(response.data.data);
           // setCartVal(response.data.data)
         } catch (error) {
-          // Handle any errors here
           console.error(error);
         } finally{
           setIsLoader(false);
@@ -51,11 +46,11 @@ export const ProductDetails = ({productID,setOrderVal,setBuyNow})=>{
           // console.log(productDetails.brand);
       const {brand,displayImage,features, images,name,price,ratings,reviews,seller,description,_id} = productDetails;
       console.log(_id);
-      const nextImages = ()=>{
-        if(StartIndex + 3 < images?.length){
-          setStartIndex(StartIndex + 3);
-        }
-      }
+      // const nextImages = ()=>{
+      //   if(StartIndex + 3 < images?.length){
+      //     setStartIndex(StartIndex + 3);
+      //   }
+      // }
 
       const addItemToCart = async(id)=>{
         try {
@@ -93,7 +88,8 @@ export const ProductDetails = ({productID,setOrderVal,setBuyNow})=>{
     return(
       <>
         <main className={style.postDetailContainer}>
-          <aside className={style.imageContainer}>
+          <ProductDetailsImages displayImage={displayImage} images={images}/>
+          {/* <aside className={style.imageContainer}>
             <img className={style.itemImage} src={displayImage} alt="iphone" />
             <div className={style.images}>
               <button className="hide" onClick={prevImages} disabled={StartIndex === 0}> <img style={{height:'1rem',width:'1rem',padding:'1rem 0rem'}} src={left} alt="prev" /></button>
@@ -108,7 +104,7 @@ export const ProductDetails = ({productID,setOrderVal,setBuyNow})=>{
               }
               <button className="hide" onClick={nextImages} disabled={StartIndex+3 >= images?.length}> <img style={{height:'1rem',width:"1rem",padding:'1rem 0rem'}} src={right} alt="next" /></button>
             </div>
-          </aside>
+          </aside> */}
 
           <aside>
             <div className={style.nameRating}>

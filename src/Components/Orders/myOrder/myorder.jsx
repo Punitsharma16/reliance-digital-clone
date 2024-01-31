@@ -7,7 +7,6 @@ import cart from '../../svgs/blackCart.svg'
 import heart from '../../svgs/heart.svg'
 import profile from '../../svgs/blackProfile.svg'
 import { useNavigate } from "react-router-dom";
-// import axios from "axios";
 export const MyOrder = ({buyNow})=>{
 
     const [order,setOrder] = useState({});
